@@ -1,0 +1,98 @@
+{
+  "games": [
+    {
+      "id": 1,
+      "name": "My first game",
+      "owner": "1",
+      "questions": [
+        {
+          "question_id": 100,
+          "question": "Question 1?",
+          "duration": 10,
+          "type": "multiple_choice",
+          "points": 2,
+          "attachment": "https://youtu.be/Ui09cCfXAVo?si=mXXbB_eEpzxY0YyH",
+          "answers": [
+            {
+              "answer_id": 200,
+              "answer": "Choice 1",
+              "correct": true
+            },
+            {
+              "answer_id": 201,
+              "answer": "Choice 2",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "question_id": 101,
+          "question": "Question 2?",
+          "duration": 10,
+          "type": "single_choice",
+          "points": 1,
+          "attachment": "https://youtu.be/_XeUEoDEc00?si=iG6jSnLokvcc7Kzz",
+          "answers": [
+            {
+              "answer_id": 203,
+              "answer": "Choice 3",
+              "correct": true
+            },
+            {
+              "answer_id": 204,
+              "answer": "Choice 4",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "My second game",
+      "owner": "1",
+      "questions": [
+        {
+          "question_id": 105,
+          "question": "Question 3?",
+          "duration": 10,
+          "type": "single_choice",
+          "points": 3,
+          "attachment": "https://youtu.be/GJIyZAd9srs?si=ZOPT4RL0-YcmdPJj",
+          "answers": [
+            {
+              "answer_id": 250,
+              "answer": "Choice 9",
+              "correct": true
+            },
+            {
+              "answer_id": 209,
+              "answer": "Choice 20",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "question_id": 106,
+          "question": "Question 4?",
+          "duration": 15,
+          "type": "judgement",
+          "points": 4,
+          "attachment": "https://youtu.be/m6XcAmIuG1g?si=oDTPpzZUgn5r0vEP",
+          "answers": [
+            {
+              "answer_id": 210,
+              "answer": "True",
+              "correct": true
+            },
+            {
+              "answer_id": 211,
+              "answer": "False",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

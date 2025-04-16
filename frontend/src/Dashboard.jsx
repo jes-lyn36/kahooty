@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import Button from 'react-bootstrap/Button';
 
-function Dashboard() {
+Dashboard = () => {
   const [games, setGames] = useState([]);
 
   useEffect(() => {

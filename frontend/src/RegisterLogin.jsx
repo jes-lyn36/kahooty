@@ -7,7 +7,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import capitalize from 'capitalize';
 
-function RegiserLogin({ successJob, token, name }) {
+RegiserLogin = ({ successJob, token, name }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();

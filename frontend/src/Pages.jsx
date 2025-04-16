@@ -11,9 +11,10 @@ import {
 import Register from './Register';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import EditGame from './Games/EditGame';
 import Button from 'react-bootstrap/Button';
 
-function Pages() {
+Pages = () => {
   const [token, setToken] = useState(null);
   const navigate = useNavigate();
 
@@ -60,6 +61,7 @@ function Pages() {
         <Route path="/register" element={<Register token={token} successJob={successJob} />} />
         <Route path="/login" element={<Login token={token} successJob={successJob} />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/game/:gameId" element={<EditGame />} />
       </Routes>
     </>
   );

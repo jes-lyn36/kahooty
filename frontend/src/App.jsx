@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Pages from './Pages';
 
-function App() {
+App = () => {
   return (
     <Router>
       <Pages />

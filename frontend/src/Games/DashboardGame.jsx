@@ -1,14 +1,21 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import {
+  Link
+} from "react-router-dom";
 
-export function DashboardGame({game}) {
+DashboardGame = ({game}) => {
   const totalQuestion = () => {
     console.log(game)
-    return game.questions;
+    return game.questions.length;
   }
 
   const totalDuration = () => {
-
+    let totalDuration = 0;
+    game.questions.forEach(question => {
+      totalDuration += question.duration
+    })
+    return totalDuration;
   }
 
   return (
@@ -22,8 +29,10 @@ export function DashboardGame({game}) {
         <ListGroup.Item>Total duration: {totalDuration()}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Card.Link href="#">Edit Game</Card.Link>
+        <Link to={`/game/${game.id}`}>Edit Game</Link>
       </Card.Body>
     </Card>
   )
 }
+
+export default DashboardGame;

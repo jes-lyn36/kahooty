@@ -14,7 +14,7 @@ import Dashboard from './Dashboard';
 import EditGame from './Games/EditGame';
 import Button from 'react-bootstrap/Button';
 
-Pages = () => {
+const Pages = () => {
   const [token, setToken] = useState(null);
   const navigate = useNavigate();
 

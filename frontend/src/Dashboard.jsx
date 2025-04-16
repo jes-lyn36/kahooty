@@ -1,10 +1,10 @@
-import { DashboardGame } from "./Games/DashboardGame";
+import DashboardGame from "./Games/DashboardGame";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
 import Button from 'react-bootstrap/Button';
 
-Dashboard = () => {
+const Dashboard = () => {
   const [games, setGames] = useState([]);
 
   useEffect(() => {

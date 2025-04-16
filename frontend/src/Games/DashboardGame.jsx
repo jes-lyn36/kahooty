@@ -4,7 +4,7 @@ import {
   Link
 } from "react-router-dom";
 
-DashboardGame = ({game}) => {
+const DashboardGame = ({game}) => {
   const totalQuestion = () => {
     console.log(game)
     return game.questions.length;

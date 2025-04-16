@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 
-EditGame = ({game}) => {
+const EditGame = ({game}) => {
   const navigate = useNavigate();
 
   return (

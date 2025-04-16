@@ -7,7 +7,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import capitalize from 'capitalize';
 
-RegiserLogin = ({ successJob, token, name }) => {
+const RegisterLogin = ({ successJob, token, name }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -54,4 +54,4 @@ RegiserLogin = ({ successJob, token, name }) => {
   )
 }
 
-export default RegiserLogin;
+export default RegisterLogin;

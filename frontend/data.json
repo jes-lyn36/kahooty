@@ -1,9 +1,17 @@
 {
-  "games": [
-    {
+  "admins": {
+    "a": {
+      "password": "a",
+      "sessionActive": true
+    }
+  },
+  "games": {
+    "1": {
+      "owner": "a",
+      "active": null,
+      "oldSessions": [],
       "id": 1,
       "name": "My first game",
-      "owner": "a",
       "questions": [
         {
           "question_id": 100,
@@ -12,7 +20,8 @@
           "type": "multiple_choice",
           "points": 2,
           "correctAnswers": [
-            200, 201
+            200,
+            201
           ],
           "attachment": "https://youtu.be/Ui09cCfXAVo?si=mXXbB_eEpzxY0YyH",
           "answers": [
@@ -32,7 +41,9 @@
           "duration": 10,
           "type": "single_choice",
           "points": 1,
-          "correctAnswers": [ 203 ],
+          "correctAnswers": [
+            203
+          ],
           "attachment": "https://youtu.be/_XeUEoDEc00?si=iG6jSnLokvcc7Kzz",
           "answers": [
             {
@@ -47,10 +58,12 @@
         }
       ]
     },
-    {
+    "2": {
+      "owner": "a",
+      "active": null,
+      "oldSessions": [],
       "id": 2,
       "name": "My second game",
-      "owner": "a",
       "questions": [
         {
           "question_id": 105,
@@ -58,7 +71,10 @@
           "duration": 10,
           "type": "single_choice",
           "points": 3,
-          "correctAnswers" : [250, 209],
+          "correctAnswers": [
+            250,
+            209
+          ],
           "attachment": "https://youtu.be/GJIyZAd9srs?si=ZOPT4RL0-YcmdPJj",
           "answers": [
             {
@@ -73,5 +89,6 @@
         }
       ]
     }
-  ]
+  },
+  "sessions": {}
 }

@@ -1,12 +1,17 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import Button from 'react-bootstrap/Button';
+import ConfirmDelete from "./ConfirmDelete";
 
-const DashboardGame = ({game}) => {
+const DashboardGame = ({games, setGames, game}) => {
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+
+  const handleCloseConfirmDelete = () => setShowConfirmDelete(false);
+  const handleShowConfirmDelete = () => setShowConfirmDelete(true);
+
   const totalQuestion = () => {
-    console.log(game)
     return game.questions.length;
   }
 
@@ -17,10 +22,10 @@ const DashboardGame = ({game}) => {
     })
     return totalDuration;
   }
-
+  
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+      <Card.Img variant="top" src={game.thumbnail ? game.thumbnail : './src/assets/no_image.png'} />
       <Card.Body>
         <Card.Title>{game.name}</Card.Title>
       </Card.Body>
@@ -30,6 +35,15 @@ const DashboardGame = ({game}) => {
       </ListGroup>
       <Card.Body>
         <Link to={`/game/${game.id}`}>Edit Game</Link>
+        <Button onClick={handleShowConfirmDelete}>Delete Game</Button>
+        <ConfirmDelete
+          showConfirmDelete={showConfirmDelete} 
+          handleCloseConfirmDelete={handleCloseConfirmDelete} 
+          game={game}
+          games={games} 
+          setGames={setGames}
+        >
+        </ConfirmDelete>
       </Card.Body>
     </Card>
   )

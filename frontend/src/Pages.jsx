@@ -22,8 +22,10 @@ const Pages = () => {
     setToken(localStorage.getItem('token'));
   }, []);
 
-  const successJob = (token) => {
+  const successJob = (token, email) => {
     localStorage.setItem('token', token);
+    localStorage.setItem('email', email);
+
     setToken(token);
     navigate('/dashboard');
   }

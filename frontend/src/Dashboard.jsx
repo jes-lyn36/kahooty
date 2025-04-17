@@ -17,7 +17,6 @@ const Dashboard = () => {
           }
         });
         setGames(response.data.games);
-        console.log(response.data.games)
       } catch (err) {
         alert(err);
       }
@@ -33,7 +32,7 @@ const Dashboard = () => {
 
       {games.length > 0 ? (
           games.map((game, index) => (
-            <DashboardGame game={game}></DashboardGame>
+            <DashboardGame game={game} key={index}></DashboardGame>
           ))
         ) :
           <p>No games owned by the account...</p>

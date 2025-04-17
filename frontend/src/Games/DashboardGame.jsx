@@ -6,7 +6,6 @@ import {
 
 const DashboardGame = ({game}) => {
   const totalQuestion = () => {
-    console.log(game)
     return game.questions.length;
   }
 

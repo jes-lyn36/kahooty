@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "My first game",
-      "owner": "1",
+      "owner": "a",
       "questions": [
         {
           "question_id": 100,
@@ -11,17 +11,18 @@
           "duration": 10,
           "type": "multiple_choice",
           "points": 2,
+          "correctAnswers": [
+            200, 201
+          ],
           "attachment": "https://youtu.be/Ui09cCfXAVo?si=mXXbB_eEpzxY0YyH",
           "answers": [
             {
               "answer_id": 200,
-              "answer": "Choice 1",
-              "correct": true
+              "answer": "Choice 1"
             },
             {
               "answer_id": 201,
-              "answer": "Choice 2",
-              "correct": false
+              "answer": "Choice 2"
             }
           ]
         },
@@ -31,17 +32,16 @@
           "duration": 10,
           "type": "single_choice",
           "points": 1,
+          "correctAnswers": [ 203 ],
           "attachment": "https://youtu.be/_XeUEoDEc00?si=iG6jSnLokvcc7Kzz",
           "answers": [
             {
               "answer_id": 203,
-              "answer": "Choice 3",
-              "correct": true
+              "answer": "Choice 3"
             },
             {
               "answer_id": 204,
-              "answer": "Choice 4",
-              "correct": true
+              "answer": "Choice 4"
             }
           ]
         }
@@ -50,7 +50,7 @@
     {
       "id": 2,
       "name": "My second game",
-      "owner": "1",
+      "owner": "a",
       "questions": [
         {
           "question_id": 105,
@@ -58,37 +58,16 @@
           "duration": 10,
           "type": "single_choice",
           "points": 3,
+          "correctAnswers" : [250, 209],
           "attachment": "https://youtu.be/GJIyZAd9srs?si=ZOPT4RL0-YcmdPJj",
           "answers": [
             {
               "answer_id": 250,
-              "answer": "Choice 9",
-              "correct": true
+              "answer": "Choice 9"
             },
             {
               "answer_id": 209,
-              "answer": "Choice 20",
-              "correct": true
-            }
-          ]
-        },
-        {
-          "question_id": 106,
-          "question": "Question 4?",
-          "duration": 15,
-          "type": "judgement",
-          "points": 4,
-          "attachment": "https://youtu.be/m6XcAmIuG1g?si=oDTPpzZUgn5r0vEP",
-          "answers": [
-            {
-              "answer_id": 210,
-              "answer": "True",
-              "correct": true
-            },
-            {
-              "answer_id": 211,
-              "answer": "False",
-              "correct": false
+              "answer": "Choice 20"
             }
           ]
         }

@@ -3,16 +3,28 @@ import { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import ErrorPopup from '../ErrorPopup';
 
-
-const CreateGame = ({show, handleClose, setGames, games}) => {
+const CreateGame = ({show, handleClose, games}) => {
   const [newGameName, setNewGameName] = useState('');
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+
+  const handleCloseErrorPopup = () => setShowErrorPopup(false);
+  const handleShowErrorPopup = () => setShowErrorPopup(true);
 
   const handleChange = (event) => {
     setNewGameName(event.target.value);
   }
 
   const createNewGame = async () => {
+    if (newGameName === "") {
+      setErrorMessage("Game title cannot be empty.")
+      handleShowErrorPopup();
+      return;
+    }
+
     const email = localStorage.getItem('email')
     const newGame = {
       "id": generateRandomNumber(),
@@ -34,7 +46,8 @@ const CreateGame = ({show, handleClose, setGames, games}) => {
           }
         });
     } catch (err) {
-      alert(err);
+      setErrorMessage(err.response?.data?.error);
+      handleShowErrorPopup();
     }
   }
 
@@ -61,6 +74,12 @@ const CreateGame = ({show, handleClose, setGames, games}) => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <ErrorPopup
+        errorMessage={errorMessage}
+        showErrorPopup={showErrorPopup}
+        handleCloseErrorPopup={handleCloseErrorPopup}
+      />
     </>
   );
 }

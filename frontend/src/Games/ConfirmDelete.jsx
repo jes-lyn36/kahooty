@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import ErrorPopup from '../ErrorPopup';
+import { useState } from "react";
 
 const ConfirmDelete = ({
   showConfirmDelete, 
@@ -9,6 +11,12 @@ const ConfirmDelete = ({
   games, 
   setGames
 }) => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+
+  const handleCloseErrorPopup = () => setShowErrorPopup(false);
+  const handleShowErrorPopup = () => setShowErrorPopup(true);
+
   const deleteGame = async () => {
     try {
       const newGames = games.filter((g) => g.id !== game.id);
@@ -24,7 +32,8 @@ const ConfirmDelete = ({
           }
         });
     } catch (err) {
-      alert(err);
+      setErrorMessage(err.response?.data?.error);
+      handleShowErrorPopup();
     }
   }
 
@@ -46,6 +55,12 @@ const ConfirmDelete = ({
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <ErrorPopup
+        errorMessage={errorMessage}
+        showErrorPopup={showErrorPopup}
+        handleCloseErrorPopup={handleCloseErrorPopup}
+      />
     </>
   );
 }

@@ -40,7 +40,7 @@ const Dashboard = () => {
 
       {games.length > 0 ? (
           games.map((game, index) => (
-            <DashboardGame games={games} setGames={setGames} game={game}></DashboardGame>
+            <DashboardGame games={games} setGames={setGames} game={game} key={index}></DashboardGame>
           ))
         ) :
           <p>No games owned by the account...</p>

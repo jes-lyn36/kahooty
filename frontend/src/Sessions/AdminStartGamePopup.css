@@ -1,0 +1,8 @@
+.copy-link {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.copy-link:hover {
+  text-decoration: underline;
+}

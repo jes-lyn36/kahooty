@@ -6,17 +6,24 @@ import {
   Route,
   Link,
   useNavigate,
+  useLocation
 } from "react-router-dom";
 
-import Register from './Register';
-import Login from './Login';
-import Dashboard from './Dashboard';
+import Register from './RegisterLogin/Register';
+import Login from './RegisterLogin/Login';
+import Dashboard from './Dashboard/Dashboard';
 import EditGame from './Games/EditGame';
+import SessionStart from './Sessions/SessionStart';
+import SessionAdvanceResult from './Sessions/SessionAdvanceResult';
+import PlayerWaitScreen from './Players/PlayerWaitScreen';
 import Button from 'react-bootstrap/Button';
 
 const Pages = () => {
   const [token, setToken] = useState(null);
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const isPlayerRoute = location.pathname.startsWith('/play');
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
@@ -47,23 +54,31 @@ const Pages = () => {
 
   return (
     <>
-      {token ? (
+      {!isPlayerRoute && (
         <>
-          <Button variant="outline-primary" onClick={logout}>Logout</Button>
-        </>
-      ) : (
-        <>
-          <Link to="/register">Register</Link>
-          &nbsp;|&nbsp;
-          <Link to="/login">Login</Link>
+          {token ? (
+            <>
+              <Button variant="outline-primary" onClick={logout}>Logout</Button>
+            </>
+          ) : (
+            <>
+              <Link to="/register">Register</Link>
+              &nbsp;|&nbsp;
+              <Link to="/login">Login</Link>
+            </>
+          )}
+          <hr />
         </>
       )}
-      <hr />
       <Routes>
         <Route path="/register" element={<Register token={token} successJob={successJob} />} />
         <Route path="/login" element={<Login token={token} successJob={successJob} />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/game/:gameId" element={<EditGame />} />
+        <Route path="/play/join/:sessionId" element={<SessionStart />} />
+        <Route path="/play/join" element={<SessionStart />} />
+        <Route path="/play/:playerId" element={<PlayerWaitScreen />} />
+        <Route path="/session/:sessionId" element={<SessionAdvanceResult />} />
       </Routes>
     </>
   );

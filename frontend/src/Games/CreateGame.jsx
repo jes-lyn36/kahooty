@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import ErrorPopup from '../ErrorPopup';
 
-const CreateGame = ({show, handleClose, games}) => {
+const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
   const [newGameName, setNewGameName] = useState('');
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,24 +27,30 @@ const CreateGame = ({show, handleClose, games}) => {
 
     const email = localStorage.getItem('email')
     const newGame = {
-      "id": generateRandomNumber(),
+      "gameId": generateRandomNumber(),
       "name": newGameName,
       "owner": email,
+      "active": 0,
       "questions": []
     }
 
     try {
       games.push(newGame);
-
+      console.log(games)
       const token = localStorage.getItem('token');
       const response = await axios.put(
         'http://localhost:5005/admin/games',
-        {games: games},
+        {
+          games: games
+        },
         {
           headers: {
             'Authorization': `Bearer ${token}`,
           }
-        });
+        }
+      );
+      setGames(games);
+
     } catch (err) {
       setErrorMessage(err.response?.data?.error);
       handleShowErrorPopup();
@@ -57,7 +63,7 @@ const CreateGame = ({show, handleClose, games}) => {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleCloseCreateModal}>
         <Modal.Header closeButton>
           <Modal.Title>Create A New Game</Modal.Title>
         </Modal.Header>
@@ -66,10 +72,10 @@ const CreateGame = ({show, handleClose, games}) => {
           <Form.Control type="Name" placeholder="Name of Your Game" value={newGameName} onChange={handleChange}/>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleCloseCreateModal}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={() => {createNewGame(), handleClose()}}>
+          <Button variant="primary" onClick={() => {createNewGame(), handleCloseCreateModal()}}>
             Create Game
           </Button>
         </Modal.Footer>

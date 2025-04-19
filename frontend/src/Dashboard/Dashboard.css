@@ -1,0 +1,15 @@
+#dashboard-games {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#create-game-button {
+  margin-bottom: 20px;
+}
+
+.side-spacing {
+  padding-left: 15px;
+  padding-right: 15px;
+}

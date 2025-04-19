@@ -1,15 +1,48 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import ConfirmDelete from "./ConfirmDelete";
+import AdminStartGamePopup from "../Sessions/AdminStartGamePopup";
+import axios from 'axios';
+import ErrorPopup from '../ErrorPopup';
+import SessionResultPopup from '../Sessions/SessionResultPopup';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from "react-router-dom";
+import './DashboardGame.css';
 
-const DashboardGame = ({games, setGames, game}) => {
+const DashboardGame = ({games, setGames, game, key}) => {
+  // Used for confirming a game deletion.
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   const handleCloseConfirmDelete = () => setShowConfirmDelete(false);
   const handleShowConfirmDelete = () => setShowConfirmDelete(true);
+
+  // Used for starting sessions.
+  const [showStartGameSession, setShowStartGameSession] = useState(false);
+
+  const handleCloseStartGameSession = () => setShowStartGameSession(false);
+  const handleShowStartGameSession = () => setShowStartGameSession(true);
+
+  // Error popups
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+
+  const handleCloseErrorPopup = () => setShowErrorPopup(false);
+  const handleShowErrorPopup = () => setShowErrorPopup(true);
+
+  // Used to show and set the game session states.
+  const [sessionActive, setSessionActive] = useState(false);
+
+  // Used to show result popup after stopping a game session.
+  const [showResultPopup, setShowResultPopup] = useState(false);
+
+  const handleCloseResultPopup = () => setShowResultPopup(false);
+  const handleShowResultPopup = () => setShowResultPopup(true);
+
+  const navigate = useNavigate();
 
   const totalQuestion = () => {
     return game.questions.length;
@@ -22,30 +55,129 @@ const DashboardGame = ({games, setGames, game}) => {
     })
     return totalDuration;
   }
+
+  const startGameSession = async () => {
+    try {
+      console.log(game.gameId);
+      console.log(games);
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        `http://localhost:5005/admin/game/${game.gameId}/mutate`,
+        {
+          mutationType: 'START'
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
+        }
+      );
+      setSessionActive(true);
+      handleShowStartGameSession();
+    } catch (err) {
+      setErrorMessage(err.response?.data?.error);
+      handleShowErrorPopup();
+    }
+  }
+
+  const stopGameSession = async () => {
+    try {
+      console.log(game.gameId);
+      console.log(games);
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        `http://localhost:5005/admin/game/${game.gameId}/mutate`,
+        {
+          mutationType: 'END'
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
+        }
+      );
+      setSessionActive(false);
+      handleShowResultPopup();
+    } catch (err) {
+      setErrorMessage(err.response?.data?.error);
+      handleShowErrorPopup();
+    }
+  }
+
+  // Used to find the sessionId when the game starts.
+  const [sessionId, setSessionId] = useState("");
+
+  const getGameSesssionId = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.get('http://localhost:5005/admin/games', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      });
+      setSessionId(response.data.games.find((g) => g.gameId === game.gameId).active);
+      console.log(response.data.games.find((g) => g.gameId === game.gameId).active)
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // Run this when modal is shown
+  useEffect(() => {
+    if (showStartGameSession) {
+      getGameSesssionId();
+    }
+  }, [showStartGameSession]);
   
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={game.thumbnail ? game.thumbnail : './src/assets/no_image.png'} />
-      <Card.Body>
-        <Card.Title>{game.name}</Card.Title>
-      </Card.Body>
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item>Number of questions: {totalQuestion()}</ListGroup.Item>
-        <ListGroup.Item>Total duration: {totalDuration()}</ListGroup.Item>
-      </ListGroup>
-      <Card.Body>
-        <Link to={`/game/${game.id}`}>Edit Game</Link>
-        <Button onClick={handleShowConfirmDelete}>Delete Game</Button>
-        <ConfirmDelete
-          showConfirmDelete={showConfirmDelete} 
-          handleCloseConfirmDelete={handleCloseConfirmDelete} 
-          game={game}
-          games={games} 
-          setGames={setGames}
-        >
-        </ConfirmDelete>
-      </Card.Body>
-    </Card>
+    <>
+      <Card id="dashboard-game-card" style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={game.thumbnail ? game.thumbnail : './src/assets/no_image.png'} />
+        <Card.Body>
+          <Card.Title>{game.name}</Card.Title>
+        </Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroup.Item>Number of questions: {totalQuestion()}</ListGroup.Item>
+          <ListGroup.Item>Total duration: {totalDuration()}</ListGroup.Item>
+          <Button variant="outline-secondary" onClick={startGameSession} disabled={sessionActive}>
+            {!sessionActive ? <>Start Game Session</> : <>Session Started</>}
+          </Button>
+          <Button variant="outline-secondary" onClick={stopGameSession} disabled={!sessionActive}> Stop Game Session </Button>
+        </ListGroup>
+        <Card.Body id="edit-delete-game">
+          <EditIcon onClick={() => navigate(`/game/${game.gameId}`)} />
+          <DeleteIcon onClick={handleShowConfirmDelete}/>
+        </Card.Body>
+      </Card>
+      <AdminStartGamePopup 
+        sessionId={sessionId}
+        showStartGameSession={showStartGameSession} 
+        handleCloseStartGameSession={handleCloseStartGameSession}
+        gameId={game.gameId}
+      >
+      </AdminStartGamePopup>
+
+      <ErrorPopup
+        errorMessage={errorMessage}
+        showErrorPopup={showErrorPopup}
+        handleCloseErrorPopup={handleCloseErrorPopup}
+      />
+
+      <SessionResultPopup 
+        sessionId={sessionId}
+        showResultPopup={showResultPopup}
+        handleCloseResultPopup={handleCloseResultPopup}
+      />
+
+      <ConfirmDelete
+        showConfirmDelete={showConfirmDelete} 
+        handleCloseConfirmDelete={handleCloseConfirmDelete} 
+        game={game}
+        games={games} 
+        setGames={setGames}
+      >
+      </ConfirmDelete>
+    </>
   )
 }
 

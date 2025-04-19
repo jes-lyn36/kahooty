@@ -15,7 +15,7 @@ import Dashboard from './Dashboard/Dashboard';
 import EditGame from './Games/EditGame';
 import SessionStart from './Sessions/SessionStart';
 import SessionAdvanceResult from './Sessions/SessionAdvanceResult';
-import PlayerWaitScreen from './Players/PlayerWaitScreen';
+import PlayerPlayScreen from './Players/PlayerPlayScreen';
 import Button from 'react-bootstrap/Button';
 
 const Pages = () => {
@@ -77,7 +77,7 @@ const Pages = () => {
         <Route path="/game/:gameId" element={<EditGame />} />
         <Route path="/play/join/:sessionId" element={<SessionStart />} />
         <Route path="/play/join" element={<SessionStart />} />
-        <Route path="/play/:playerId" element={<PlayerWaitScreen />} />
+        <Route path="/play/:playerId" element={<PlayerPlayScreen />} />
         <Route path="/session/:sessionId" element={<SessionAdvanceResult />} />
       </Routes>
     </>

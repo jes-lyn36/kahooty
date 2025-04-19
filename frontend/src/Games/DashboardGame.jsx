@@ -36,6 +36,12 @@ const DashboardGame = ({games, setGames, game, key}) => {
   // Used to show and set the game session states.
   const [sessionActive, setSessionActive] = useState(false);
 
+  useEffect(() => {
+    if (game.active) {
+      setSessionActive(true);
+    }
+  }, []);
+
   // Used to show result popup after stopping a game session.
   const [showResultPopup, setShowResultPopup] = useState(false);
 
@@ -58,8 +64,6 @@ const DashboardGame = ({games, setGames, game, key}) => {
 
   const startGameSession = async () => {
     try {
-      console.log(game.gameId);
-      console.log(games);
       const token = localStorage.getItem('token');
       const response = await axios.post(
         `http://localhost:5005/admin/game/${game.gameId}/mutate`,
@@ -82,8 +86,6 @@ const DashboardGame = ({games, setGames, game, key}) => {
 
   const stopGameSession = async () => {
     try {
-      console.log(game.gameId);
-      console.log(games);
       const token = localStorage.getItem('token');
       const response = await axios.post(
         `http://localhost:5005/admin/game/${game.gameId}/mutate`,
@@ -116,17 +118,14 @@ const DashboardGame = ({games, setGames, game, key}) => {
         }
       });
       setSessionId(response.data.games.find((g) => g.gameId === game.gameId).active);
-      console.log(response.data.games.find((g) => g.gameId === game.gameId).active)
     } catch (err) {
       console.log(err);
     }
   }
 
-  // Run this when modal is shown
+  // If the game state changed, set the sessionId.
   useEffect(() => {
-    if (showStartGameSession) {
-      getGameSesssionId();
-    }
+    getGameSesssionId();
   }, [showStartGameSession]);
   
   return (
@@ -142,6 +141,7 @@ const DashboardGame = ({games, setGames, game, key}) => {
           <Button variant="outline-secondary" onClick={startGameSession} disabled={sessionActive}>
             {!sessionActive ? <>Start Game Session</> : <>Session Started</>}
           </Button>
+          <Button variant="outline-secondary" onClick={() => {navigate(`/session/${sessionId}`, { state: { game } }); console.log(game)}} disabled={!sessionActive}> Modify Game Session </Button>
           <Button variant="outline-secondary" onClick={stopGameSession} disabled={!sessionActive}> Stop Game Session </Button>
         </ListGroup>
         <Card.Body id="edit-delete-game">
@@ -167,6 +167,7 @@ const DashboardGame = ({games, setGames, game, key}) => {
         sessionId={sessionId}
         showResultPopup={showResultPopup}
         handleCloseResultPopup={handleCloseResultPopup}
+        game={game}
       />
 
       <ConfirmDelete

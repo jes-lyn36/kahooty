@@ -36,7 +36,6 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
 
     try {
       games.push(newGame);
-      console.log(games)
       const token = localStorage.getItem('token');
       const response = await axios.put(
         'http://localhost:5005/admin/games',

@@ -2,11 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 
-const SessionResultPopup = ({sessionId, showResultPopup, handleCloseResultPopup}) => {
+const SessionResultPopup = ({sessionId, showResultPopup, handleCloseResultPopup, game}) => {
   const navigate = useNavigate();
   
   const resultScreen = () => {
-    navigate(`/session/${sessionId}`);
+    navigate(`/session/${sessionId}`, { state: { game } });
   }
   
   return (

@@ -25,7 +25,6 @@ const Dashboard = () => {
           }
         });
         setGames(response.data.games);
-        console.log(response.data.games);
       } catch (err) {
         alert(err);
       }

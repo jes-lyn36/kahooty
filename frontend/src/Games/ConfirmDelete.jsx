@@ -19,7 +19,6 @@ const ConfirmDelete = ({
 
   const deleteGame = async () => {
     try {
-      console.log(game.gameId);
       const newGames = games.filter((g) => g.gameId !== game.gameId);
 
       const token = localStorage.getItem('token');
@@ -32,7 +31,6 @@ const ConfirmDelete = ({
           }
         }
       );
-      console.log(newGames);
       setGames(newGames);
 
     } catch (err) {

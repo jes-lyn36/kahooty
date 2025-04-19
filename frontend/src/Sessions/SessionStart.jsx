@@ -41,7 +41,6 @@ const SessionStart = () => {
         }
       );
       navigate(`/play/${response.data.playerId}`);
-      console.log(response);
     } catch (err) {
       setErrorMessage(err.response?.data?.error || "Unable to join game.");
       handleShowErrorPopup();

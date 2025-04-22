@@ -9,14 +9,15 @@ import {
   useLocation
 } from "react-router-dom";
 
-import Register from './RegisterLogin/Register';
-import Login from './RegisterLogin/Login';
-import Dashboard from './Dashboard/Dashboard';
-import EditGame from './Games/EditGame';
-import SessionStart from './Sessions/SessionStart';
-import SessionAdvanceResult from './Sessions/SessionAdvanceResult';
-import PlayerPlayScreen from './Players/PlayerPlayScreen';
+import Register from '../RegisterLogin/Register';
+import Login from '../RegisterLogin/Login';
+import Dashboard from '../Dashboard/Dashboard';
+import EditGame from '../Games/EditGame';
+import SessionStart from '../Sessions/SessionStart';
+import SessionAdvanceResult from '../Sessions/SessionAdvanceResult';
+import PlayerPlayScreen from '../Players/PlayerPlayScreen';
 import Button from 'react-bootstrap/Button';
+import './Pages.css'; 
 
 const Pages = () => {
   const [token, setToken] = useState(null);
@@ -58,7 +59,7 @@ const Pages = () => {
         <>
           {token ? (
             <>
-              <Button variant="outline-primary" onClick={logout}>Logout</Button>
+              <Button id="logout-button" variant="outline-primary" onClick={logout}>Logout</Button>
             </>
           ) : (
             <>
@@ -71,6 +72,7 @@ const Pages = () => {
         </>
       )}
       <Routes>
+        <Route path="/" element={<Register token={token} successJob={successJob} />} />
         <Route path="/register" element={<Register token={token} successJob={successJob} />} />
         <Route path="/login" element={<Login token={token} successJob={successJob} />} />
         <Route path="/dashboard" element={<Dashboard />} />

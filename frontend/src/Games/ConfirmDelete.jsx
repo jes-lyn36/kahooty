@@ -19,8 +19,7 @@ const ConfirmDelete = ({
 
   const deleteGame = async () => {
     try {
-      const newGames = games.filter((g) => g.id !== game.id);
-      setGames(newGames);
+      const newGames = games.filter((g) => g.gameId !== game.gameId);
 
       const token = localStorage.getItem('token');
       const response = await axios.put(
@@ -30,7 +29,10 @@ const ConfirmDelete = ({
           headers: {
             'Authorization': `Bearer ${token}`,
           }
-        });
+        }
+      );
+      setGames(newGames);
+
     } catch (err) {
       setErrorMessage(err.response?.data?.error);
       handleShowErrorPopup();

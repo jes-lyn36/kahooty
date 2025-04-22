@@ -6,7 +6,7 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Pages from './Pages';
+import Pages from './Pages/Pages';
 
 const App = () => {
   return (

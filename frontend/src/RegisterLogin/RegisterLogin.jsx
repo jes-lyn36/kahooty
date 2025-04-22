@@ -6,7 +6,8 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import capitalize from 'capitalize';
-import ErrorPopup from './ErrorPopup';
+import ErrorPopup from '../ErrorPopup';
+import "./RegisterLogin.css";
 
 const RegisterLogin = ({ successJob, token, name}) => {
   const [email, setEmail] = useState('');
@@ -47,56 +48,60 @@ const RegisterLogin = ({ successJob, token, name}) => {
   }
   
   return (
-    <Form onSubmit={(e) => { e.preventDefault(); tryLoginRegister(); }}>
-      <h1>{capitalize(name)}</h1><br/>
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Email </InputGroup.Text>
-        <Form.Control value={email} onChange={e => setEmail(e.target.value)}
-          placeholder="123@email.com"
-          aria-label="Username"
-          aria-describedby="basic-addon1"
-        />
-      </InputGroup>
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Password </InputGroup.Text>
-        <Form.Control value={password} onChange={e => setPassword(e.target.value)}
-          placeholder="Password123"
-          aria-label="Username"
-          aria-describedby="basic-addon1"
-          type="password"
-        />
-      </InputGroup>
-
-      {name === 'register' && (
-        <>
+    <>
+      <div class="side-spacing">
+        <Form onSubmit={(e) => { e.preventDefault(); tryLoginRegister(); }}>
+          <h1 >{capitalize(name)}</h1><br/>
           <InputGroup className="mb-3">
-            <InputGroup.Text id="basic-addon1">Username</InputGroup.Text>
-            <Form.Control value={userName} onChange={e => setUserName(e.target.value)}
-              placeholder="Your display name"
+            <InputGroup.Text id="basic-addon1">Email </InputGroup.Text>
+            <Form.Control value={email} onChange={e => setEmail(e.target.value)}
+              placeholder="123@email.com"
               aria-label="Username"
               aria-describedby="basic-addon1"
             />
           </InputGroup>
-
           <InputGroup className="mb-3">
-            <InputGroup.Text id="basic-addon1">Confirm</InputGroup.Text>
-            <Form.Control value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
-              placeholder="Confirm password"
-              aria-label="Confirm password"
+            <InputGroup.Text id="basic-addon1">Password </InputGroup.Text>
+            <Form.Control value={password} onChange={e => setPassword(e.target.value)}
+              placeholder="Password123"
+              aria-label="Username"
               aria-describedby="basic-addon1"
               type="password"
             />
           </InputGroup>
-        </>
-      )}
-      <Button type="submit" onClick={tryLoginRegister} variant="primary">Submit</Button>
+
+          {name === 'register' && (
+            <>
+              <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1">Username</InputGroup.Text>
+                <Form.Control value={userName} onChange={e => setUserName(e.target.value)}
+                  placeholder="Your display name"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                />
+              </InputGroup>
+
+              <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1">Confirm</InputGroup.Text>
+                <Form.Control value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm password"
+                  aria-label="Confirm password"
+                  aria-describedby="basic-addon1"
+                  type="password"
+                />
+              </InputGroup>
+            </>
+          )}
+          <Button type="submit" onClick={tryLoginRegister} variant="primary">Submit</Button>
+        </Form>
+      </div>
 
       <ErrorPopup
         errorMessage={errorMessage}
         showErrorPopup={showErrorPopup}
         handleCloseErrorPopup={handleCloseErrorPopup}
       />
-    </Form>
+    </>
   )
 }
 

@@ -1,0 +1,51 @@
+{
+  "gameId": 1,
+  "name": "My first game",
+  "owner": "1",
+  "active": 0,
+  "thumbnail": "",
+  "questions": [
+    {
+      "questionId": 100,
+      "question": "Question 1?",
+      "duration": 10,
+      "type": "multiple_choice",
+      "points": 2,
+      "attachment": "https://youtu.be/Ui09cCfXAVo?si=mXXbB_eEpzxY0YyH",
+      "correctAnswers": [
+        200, 201
+      ],
+      "answers": [
+        {
+          "answerId": 200,
+          "answer": "Choice 1"
+        },
+        {
+          "answerId": 201,
+          "answer": "Choice 2"
+        }
+      ]
+    },
+    {
+      "questionId": 101,
+      "question": "Question 2?",
+      "duration": 10,
+      "type": "single_choice",
+      "points": 1,
+      "attachment": "https://youtu.be/_XeUEoDEc00?si=iG6jSnLokvcc7Kzz",
+      "correctAnswers": [
+        203
+      ],
+      "answers": [
+        {
+          "answerId": 203,
+          "answer": "Choice 3"
+        },
+        {
+          "answerId": 204,
+          "answer": "Choice 4"
+        }
+      ]
+    }
+  ]
+}

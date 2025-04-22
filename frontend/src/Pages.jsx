@@ -64,6 +64,7 @@ const Pages = () => {
         <Route path="/login" element={<Login token={token} successJob={successJob} />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/game/:gameId" element={<EditGame />} />
+        <Route path="/game/:gameId/question/:questionId" element={<EditGame />} />
       </Routes>
     </>
   );

@@ -30,3 +30,5 @@ Made Advance button suspended when the game has ended in SessionAdvanceResult.
 
 Made Start "Game Session button" turn to "Session Started" when the game is started in DashboardGame.
 Made "Stop Game Session" turn to "Session Ended" when the game has ended in SessionAdvanceResult.
+
+Added a check for whether or not the file is a json file when creating a new game.

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField';
 import QuestionNav from './QuestionNav';
+import QuestionEdit from './QuestionEdit';
+import QuestionOptions from './QuestionOptions';
 
 const EditGame = () => {
   const navigate = useNavigate();
@@ -238,6 +240,21 @@ const EditGame = () => {
           deleteQuestion={deleteQuestion}
           handleListQuestionClick={handleListQuestionClick} 
           addQuestion={addQuestion}
+        />
+        
+        <QuestionEdit 
+          question={question}
+          answers={answers}
+          handleQuestionChange={handleQuestionChange}
+          deleteAnswer={deleteAnswer}
+          editAnswer={editAnswer}
+          addCorrectAnswer={addCorrectAnswer}
+          addAnswer={addAnswer}
+        />
+
+        <QuestionOptions
+          question={question}
+          handleQuestionChange={handleQuestionChange}
         />
       </Grid>
     </>

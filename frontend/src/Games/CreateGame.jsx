@@ -50,7 +50,27 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
         "name": newGameName,
         "owner": email,
         "active": 0,
-        "questions": []
+        "questions": [
+          {
+            "questionId": generateRandomNumber(),
+            "question": "",
+            "duration": 1,
+            "type": "multiple_choice",
+            "points": 1,
+            "attachment": "",
+            "correctAnswers": [],
+            "answers": [
+              {
+                "answerId": generateRandomNumber(),
+                "answer": ""
+              }, 
+              {
+                "answerId": generateRandomNumber(),
+                "answer": ""
+              }
+            ]
+          }
+        ]
       }
     } else {
       try {

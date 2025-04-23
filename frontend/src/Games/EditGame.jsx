@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField';
 
 const EditGame = () => {
@@ -72,7 +73,34 @@ const EditGame = () => {
     changedGames[gameIndex] = game;
     setGames(changedGames);
   }
-  
+
+  const handleListQuestionClick = async (index) => {
+    saveQuestion();
+    setSelectedIndex(index);
+    saveAnswers();
+    setQuestion(game.questions[index]);
+    setAnswers(game.questions[index].answers)
+  };
+
+  const saveChange = async () => {
+    saveAnswers();
+    saveQuestion();
+    saveGame();
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.put('http://localhost:5005/admin/games', { 
+        games: games
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      });
+      navigate('/dashboard');
+    } catch (err) {
+      alert(err); 
+    }
+  }
+
   return (
     <>
       <h1>Edit Game</h1>
@@ -80,6 +108,9 @@ const EditGame = () => {
       <Button variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button>
       <TextField fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
 
+      <Grid container spacing={2} mt={2}>
+
+      </Grid>
     </>
   )
 }

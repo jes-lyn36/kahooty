@@ -82,6 +82,39 @@ const EditGame = () => {
     setAnswers(game.questions[index].answers)
   };
 
+  const handleQuestionChange = (changedKey, changedValue) => {
+    const obj = question;
+    const entries = Object.entries(obj).map(([key, value]) => key === changedKey ? [key, changedValue] : [key, value]);
+    const result = Object.fromEntries(entries);
+
+    if (changedKey === "type") {
+      result.correctAnswers = [];
+    }
+
+    if (changedKey === "type" && changedValue === "judgement") {
+      result.answers = [
+        {
+          answerId: generateRandomNumber(),
+          answer: "True"
+        },
+        {
+          answerId: generateRandomNumber(),
+          answer: "False"
+        }
+      ]
+    }
+
+    setQuestion(result);
+    setAnswers(result.answers);
+  }
+
+  const handleGameChange = (changedKey, changedValue) => {
+    const obj = game;
+    const entries = Object.entries(obj).map(([key, value]) => key === changedKey ? [key, changedValue] : [key, value]);
+    const result = Object.fromEntries(entries);
+    setGame(result);
+  }
+
   const saveChange = async () => {
     saveAnswers();
     saveQuestion();
@@ -117,7 +150,7 @@ const EditGame = () => {
     setGame(newGame);
     setNumQuestions(numQuestions + 1);
   }
-
+  
   const deleteQuestion = async (index) => {
     if (numQuestions === 1) {
       alert("cannot delete if there is only one question left");
@@ -148,7 +181,28 @@ const EditGame = () => {
       <TextField fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
 
       <Grid container spacing={2} mt={2}>
+        <QuestionNav
+          questions={game.questions}
+          selectedIndex={selectedIndex}
+          deleteQuestion={deleteQuestion}
+          handleListQuestionClick={handleListQuestionClick} 
+          addQuestion={addQuestion}
+        />
+        
+        <QuestionEdit 
+          question={question}
+          answers={answers}
+          handleQuestionChange={handleQuestionChange}
+          deleteAnswer={deleteAnswer}
+          editAnswer={editAnswer}
+          addCorrectAnswer={addCorrectAnswer}
+          addAnswer={addAnswer}
+        />
 
+        <QuestionOptions
+          question={question}
+          handleQuestionChange={handleQuestionChange}
+        />
       </Grid>
     </>
   )

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField';
+import QuestionNav from './QuestionNav';
 
 const EditGame = () => {
   const navigate = useNavigate();
@@ -173,6 +174,56 @@ const EditGame = () => {
     setNumQuestions(numQuestions - 1);
   }
 
+  const editAnswer = (index, text) => {
+    let editedAnswer = answers[index];
+    editedAnswer.answer = text;
+    setAnswers(answers.with(index, editedAnswer));
+  }
+  
+  const addAnswer = () => {
+    if (answers.length >= 6) {
+      alert("max answers is 6");
+      return;
+    }
+
+    const answer = {
+      answerId: generateRandomNumber(),
+      answer: ""
+    }
+    const changedAnswer = answers;
+    changedAnswer.push(answer);
+    setQuestion({...question, answers: answers});
+    setAnswers(changedAnswer);
+  }
+
+  const addCorrectAnswer = (answerId, checked) => {
+    const correctAnswers = question.correctAnswers;
+    if (checked) {
+      correctAnswers.push(answerId);
+    } else {
+      correctAnswers.splice(correctAnswers.indexOf(answerId), 1)
+    }
+    setQuestion({...question, correctAnswers: correctAnswers});
+  }
+
+  const deleteAnswer = (answerId) => {
+    if (answers.length === 2) {
+      alert("min amount of answers is 2");
+      return;
+    }
+    
+    const index = answers.findIndex(answer => answer.answerId === answerId);
+    const answerRemoved = answers;
+    answerRemoved.splice(index, 1);
+
+    if (question.correctAnswers.includes(answerId)) {
+      addCorrectAnswer(answerId, false);
+    }
+
+    setAnswers([...answerRemoved]);
+    setQuestion({...question, answers: answerRemoved});
+  }
+  
   return (
     <>
       <h1>Edit Game</h1>
@@ -187,21 +238,6 @@ const EditGame = () => {
           deleteQuestion={deleteQuestion}
           handleListQuestionClick={handleListQuestionClick} 
           addQuestion={addQuestion}
-        />
-        
-        <QuestionEdit 
-          question={question}
-          answers={answers}
-          handleQuestionChange={handleQuestionChange}
-          deleteAnswer={deleteAnswer}
-          editAnswer={editAnswer}
-          addCorrectAnswer={addCorrectAnswer}
-          addAnswer={addAnswer}
-        />
-
-        <QuestionOptions
-          question={question}
-          handleQuestionChange={handleQuestionChange}
         />
       </Grid>
     </>

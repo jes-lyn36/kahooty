@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import TextField from '@mui/material/TextField';
 
 const EditGame = () => {
   const navigate = useNavigate();
@@ -52,9 +54,32 @@ const EditGame = () => {
     getGames();
   }, []);
 
+  const saveAnswers = () => {
+    let changedQuestion = question;
+    changedQuestion.answers = answers;
+    setQuestion(changedQuestion);
+  }
 
+  const saveQuestion = () => {
+    let changedGame = game;
+    changedGame.questions[selectedIndex] = question;
+    setGame(changedGame);
+  }
+
+  const saveGame = () => {
+    let gameIndex = games.findIndex((prevGame) => prevGame.id === game.id);
+    let changedGames = games;
+    changedGames[gameIndex] = game;
+    setGames(changedGames);
+  }
+  
   return (
     <>
+      <h1>Edit Game</h1>
+      <Button variant="secondary" onClick={() => navigate('/dashboard')}>Back to Games</Button>
+      <Button variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button>
+      <TextField fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
+
     </>
   )
 }

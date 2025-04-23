@@ -25,3 +25,6 @@ Made the background for player waiting screen darker so the text would be more r
 
 4. Dashboard :
 Made the game cards fill the screen as a grid so the user would be able to see more cards more efficiently.
+
+5. Login/Register :
+Made a landing page before the register or login page for better user experience and recognisability.

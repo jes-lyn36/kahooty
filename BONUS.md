@@ -19,6 +19,11 @@ Made Start "Game Session button" turn to "Session Started" when the game is star
 Added a check for whether or not the file is a json file when creating a new game.
 
 2. Register/Login :
+Made a landing page with a title and description to start when the user goes to the website.
+Added a picture to the landing page taken straight from Kahoot.
+
+Immediately go to register page when the user navigates to the link.
+
 Made register password an hidden input of type password.
 Made login password an hidden input of type password.
 

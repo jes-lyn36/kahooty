@@ -33,9 +33,9 @@ const Dashboard = () => {
     getGames();
   }, []);
 
-	return (
-		<>
-      <div class="side-spacing">
+  return (
+    <>
+      <div className="side-spacing">
         <h1>Dashboard</h1>
         <hr/>
         <Button id="create-game-button" variant="secondary" onClick={handleShowCreateModal}>Create Game</Button>
@@ -43,15 +43,15 @@ const Dashboard = () => {
       <CreateGame show={ShowCreateModal} handleCloseCreateModal={handleCloseCreateModal} setGames={setGames} games={games}></CreateGame>
       <div id="dashboard-games">
         {games.length > 0 ? (
-            games.map((game, index) => (
-              <DashboardGame games={games} setGames={setGames} game={game} key={index}></DashboardGame>
-            ))
-          ) :
-            <p>No games owned by the account...</p>
+          games.map((game, index) => (
+            <DashboardGame games={games} setGames={setGames} game={game} key={index}></DashboardGame>
+          ))
+        ) :
+          <p>No games owned by the account...</p>
         }
       </div>
-		</>
-	)
+    </>
+  )
 }
 
 export default Dashboard;

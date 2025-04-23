@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import RegisterLogin from './RegisterLogin';
 
 const Register = ({ successJob, token}) => {

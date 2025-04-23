@@ -49,7 +49,7 @@ const RegisterLogin = ({ successJob, token, name}) => {
   
   return (
     <>
-      <div class="side-spacing">
+      <div className="side-spacing">
         <Form onSubmit={(e) => { e.preventDefault(); tryLoginRegister(); }}>
           <h1 >{capitalize(name)}</h1><br/>
           <InputGroup className="mb-3">

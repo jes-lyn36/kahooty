@@ -48,7 +48,7 @@ const SessionStart = () => {
   }
 
   return (
-    <div class="general-style">
+    <div className="general-style">
       <h1>Session Start Screen</h1>
       <hr/>
       <InputGroup className="mb-3">

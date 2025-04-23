@@ -7,8 +7,17 @@ import TextField from '@mui/material/TextField';
 import QuestionNav from './QuestionNav';
 import QuestionEdit from './QuestionEdit';
 import QuestionOptions from './QuestionOptions';
+import './EditGame.css';
+import ErrorPopup from '../ErrorPopup';
 
 const EditGame = () => {
+  // Used to show error popup messages.
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+
+  const handleCloseErrorPopup = () => setShowErrorPopup(false);
+  const handleShowErrorPopup = () => setShowErrorPopup(true);
+
   const navigate = useNavigate();
   const [games, setGames] = useState([]);
   const [game, setGame] = useState({
@@ -51,7 +60,8 @@ const EditGame = () => {
         setAnswers(game.questions[0].answers);
         setNumQuestions(game.questions.length);
       } catch (err) {
-        alert(err); 
+        setErrorMessage(err.response?.data?.error);
+        handleShowErrorPopup();
       }      
     }
     
@@ -124,7 +134,7 @@ const EditGame = () => {
     saveGame();
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put('http://localhost:5005/admin/games', { 
+      await axios.put('http://localhost:5005/admin/games', { 
         games: games
       }, {
         headers: {
@@ -133,7 +143,8 @@ const EditGame = () => {
       });
       navigate('/dashboard');
     } catch (err) {
-      alert(err); 
+      setErrorMessage(err.response?.data?.error);
+      handleShowErrorPopup();
     }
   }
 
@@ -146,7 +157,16 @@ const EditGame = () => {
       points: 1,
       attachment: "",
       correctAnswers: [],
-      answers: []
+      answers: [
+        {
+          answerId: generateRandomNumber(),
+          answer: ""
+        },
+        {
+          answerId: generateRandomNumber(),
+          answer: ""
+        }
+      ]
     }
     const newGame = game;
     newGame.questions.push(newQuestion);
@@ -156,7 +176,8 @@ const EditGame = () => {
   
   const deleteQuestion = async (index) => {
     if (numQuestions === 1) {
-      alert("cannot delete if there is only one question left");
+      setErrorMessage("Cannot delete if there is only one question left.");
+      handleShowErrorPopup();
       return;
     }
 
@@ -184,7 +205,8 @@ const EditGame = () => {
   
   const addAnswer = () => {
     if (answers.length >= 6) {
-      alert("max answers is 6");
+      setErrorMessage("The maximum answer options is 6.");
+      handleShowErrorPopup();
       return;
     }
 
@@ -210,7 +232,8 @@ const EditGame = () => {
 
   const deleteAnswer = (answerId) => {
     if (answers.length === 2) {
-      alert("min amount of answers is 2");
+      setErrorMessage("The minimum in amount of answers is 2.");
+      handleShowErrorPopup();
       return;
     }
     
@@ -227,10 +250,12 @@ const EditGame = () => {
   }
   
   return (
-    <>
+    <div className="side-spacing">
       <h1>Edit Game</h1>
       <Button variant="secondary" onClick={() => navigate('/dashboard')}>Back to Games</Button>
-      <Button variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <Button variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button><br/>
+      <hr/><br/>
       <TextField fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
 
       <Grid container spacing={2} mt={2}>
@@ -243,7 +268,7 @@ const EditGame = () => {
         />
         
         <QuestionEdit 
-          question={question}
+          question={question} 
           answers={answers}
           handleQuestionChange={handleQuestionChange}
           deleteAnswer={deleteAnswer}
@@ -257,7 +282,13 @@ const EditGame = () => {
           handleQuestionChange={handleQuestionChange}
         />
       </Grid>
-    </>
+
+      <ErrorPopup
+        errorMessage={errorMessage}
+        showErrorPopup={showErrorPopup}
+        handleCloseErrorPopup={handleCloseErrorPopup}
+      />
+    </div>
   )
 }
 

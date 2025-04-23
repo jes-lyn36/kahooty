@@ -20,7 +20,7 @@ const SessionAdvanceResult = () => {
   const advanceGameSession = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(
+      await axios.post(
         `http://localhost:5005/admin/game/${game.gameId}/mutate`,
         {
           mutationType: 'ADVANCE'
@@ -69,7 +69,7 @@ const SessionAdvanceResult = () => {
   const stopGameSession = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(
+      await axios.post(
         `http://localhost:5005/admin/game/${game.gameId}/mutate`,
         {
           mutationType: 'END'
@@ -88,21 +88,21 @@ const SessionAdvanceResult = () => {
   }
 
   return (
-  <>
-    <h1>Advance Result screen</h1>
-    <hr/>
-    <Button onClick={() => navigate('/Dashboard')}>Back to Dashboard</Button>
-    <Button onClick={advanceGameSession} disabled={!sessionActive}>Advance</Button>
-    <Button variant="outline-secondary" onClick={stopGameSession} disabled={!sessionActive}>
-      {sessionActive ? <>Stop Game Session</> : <>Session Ended</>}
-    </Button>
+    <>
+      <h1>Advance Result screen</h1>
+      <hr/>
+      <Button onClick={() => navigate('/Dashboard')}>Back to Dashboard</Button>
+      <Button onClick={advanceGameSession} disabled={!sessionActive}>Advance</Button>
+      <Button variant="outline-secondary" onClick={stopGameSession} disabled={!sessionActive}>
+        {sessionActive ? <>Stop Game Session</> : <>Session Ended</>}
+      </Button>
 
-    <ErrorPopup
-      errorMessage={errorMessage}
-      showErrorPopup={showErrorPopup}
-      handleCloseErrorPopup={handleCloseErrorPopup}
-    />
-  </>
+      <ErrorPopup
+        errorMessage={errorMessage}
+        showErrorPopup={showErrorPopup}
+        handleCloseErrorPopup={handleCloseErrorPopup}
+      />
+    </>
   )
 }
 

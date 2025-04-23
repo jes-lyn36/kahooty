@@ -101,6 +101,45 @@ const EditGame = () => {
     }
   }
 
+  const addQuestion = async () => {
+    const newQuestion = {
+      questionId: generateRandomNumber(),
+      question: "",
+      duration: 1,
+      type: "multiple_choice",
+      points: 1,
+      attachment: "",
+      correctAnswers: [],
+      answers: []
+    }
+    const newGame = game;
+    newGame.questions.push(newQuestion);
+    setGame(newGame);
+    setNumQuestions(numQuestions + 1);
+  }
+
+  const deleteQuestion = async (index) => {
+    if (numQuestions === 1) {
+      alert("cannot delete if there is only one question left");
+      return;
+    }
+
+    const questions = game.questions;
+    questions.splice(index, 1);
+    setGame({...game, questions: questions})
+
+    // if deleted questions is equal to current question, then
+    // go to the previous question
+    if (index <= selectedIndex && selectedIndex > 0) {
+      setSelectedIndex(selectedIndex - 1);
+      setQuestion(game.questions[selectedIndex - 1]);
+    } else {
+      // this is for the case where the first question is deleted
+      setQuestion(game.questions[selectedIndex]);
+    }
+    setNumQuestions(numQuestions - 1);
+  }
+
   return (
     <>
       <h1>Edit Game</h1>

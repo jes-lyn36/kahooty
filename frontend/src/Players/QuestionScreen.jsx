@@ -27,7 +27,6 @@ const QuestionScreen = ({question, countDown, correctAnswers, curIndex, playerId
   }, [answers]);
 
   const handleAnswer = (val) => {
-    console.log(val)
     setAnswers(val);
   }
 

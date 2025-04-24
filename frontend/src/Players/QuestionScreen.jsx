@@ -5,9 +5,8 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 
-const QuestionScreen = ({question, countDown, correctAnswers, curIndex}) => {
+const QuestionScreen = ({question, countDown, correctAnswers, curIndex, playerId}) => {
 
-  const { playerId } = useParams();
   const [answers, setAnswers] = useState([]);
   const [index, setIndex] = useState(0);
 

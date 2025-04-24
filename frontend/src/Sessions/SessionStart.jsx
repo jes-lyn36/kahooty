@@ -60,7 +60,7 @@ const SessionStart = () => {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          joinGame();
+          // joinGame();
         }}
       >
         <InputGroup className="mb-3">

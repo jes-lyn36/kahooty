@@ -66,7 +66,6 @@ const PlayerPlayScreen = () => {
       const response = await axios.get(`http://localhost:5005/play/${playerId}/results`);
       setResults(JSON.parse(JSON.stringify(response.data)));
     } catch {
-      console.log('null')
       setResults(null);
     }
   }
@@ -101,12 +100,12 @@ const PlayerPlayScreen = () => {
       ) : answers && question ? (
         <div className="general-style overlay-content">
           Answers
-          <QuestionScreen question={question} correctAnswers={answers}/>
+          <QuestionScreen question={question} correctAnswers={answers} playerId={playerId}/>
         </div>
       ) : question ? (
         <div className="general-style overlay-content">
           <h1>Question {index}</h1>
-          <QuestionScreen question={question} countDown={countDown} curIndex={index}/>
+          <QuestionScreen question={question} countDown={countDown} curIndex={index} playerId={playerId}/>
         </div>        
       ) : (
         <main role="main" className="general-style overlay-content">

@@ -53,3 +53,5 @@ Made "Stop Game Session" turn to "Session Ended" when the game has ended in Sess
 
 Made an error message to the player to inform that they can't join a game when it's ongoing.
 
+Player will get an error if they input an empty string as their name.
+Player will not be able to edit the sessionId if it's copied from the given link.

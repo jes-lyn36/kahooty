@@ -34,7 +34,7 @@ const ResultScreen = ({results}) => {
         const paddedCorrect = correct.padEnd(8);
         const paddedPoints = `${point} points`
 
-        return (<h2 style={{fontFamily: 'monospace', whiteSpace: 'pre' }}>Question {paddedIndex} | {paddedTime} | {paddedCorrect} | {paddedPoints}</h2>)
+        return (<h2 key={index} style={{fontFamily: 'monospace', whiteSpace: 'pre' }}>Question {paddedIndex} | {paddedTime} | {paddedCorrect} | {paddedPoints}</h2>)
       })}
       <h2>{`-----------------------------------------------------------`}</h2>
       <h2 style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>

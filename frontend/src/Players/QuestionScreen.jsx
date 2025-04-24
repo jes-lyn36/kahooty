@@ -52,8 +52,8 @@ const QuestionScreen = ({question, countDown, correctAnswers, curIndex}) => {
       <h2 className="mb-5">{question.question}</h2>
       <ToggleButtonGroup className="w-50" type="checkbox" vertical value={answers} onChange={handleAnswer}>
         {
-          question.answers.map((answer) => (
-            <ToggleButton className="mb-2 rounded-pill" id={`toggle-${answer.answerId}`} variant={getVariant(answer.answerId)} value={answer.answerId}>
+          question.answers.map((answer, index) => (
+            <ToggleButton className="mb-2 rounded-pill" key={index} id={`toggle-${answer.answerId}`} variant={getVariant(answer.answerId)} value={answer.answerId}>
               {answer.answer}
             </ToggleButton>
           ))

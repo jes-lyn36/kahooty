@@ -47,7 +47,7 @@ const PlayerPlayScreen = () => {
         }, 1000)
       }
 
-    } catch (err) {
+    } catch {
       setQuestion(null);
     }
   }
@@ -56,7 +56,7 @@ const PlayerPlayScreen = () => {
     try {
       const response = await axios.get(`http://localhost:5005/play/${playerId}/answer`);
       setAnswers(response.data.answers);
-    } catch (err) {
+    } catch {
       setAnswers(null);
     }
   }
@@ -64,8 +64,9 @@ const PlayerPlayScreen = () => {
   const getResults = async () => {
     try {
       const response = await axios.get(`http://localhost:5005/play/${playerId}/results`);
-      setResults(response.data);
-    } catch (err) {
+      setResults(JSON.parse(JSON.stringify(response.data)));
+    } catch {
+      console.log('null')
       setResults(null);
     }
   }

@@ -9,5 +9,6 @@ linechecking:
 lint:
   stage: checks
   script:
+    - cd frontend
     - npm install
     - npm run lint

@@ -1,0 +1,29 @@
+#landing-container {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(to bottom, #ffffff, #e3f2fd);
+    min-height: 100vh;
+  }
+  
+#landing-title {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #1976d2;
+    margin-bottom: 0.5rem;
+    font-family: Tahoma;
+}
+
+#landing-description {
+    font-size: 1.5rem;
+    color: #555;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    font-family: Tahoma;
+}
+
+#landing-image {
+    max-width: 800px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}

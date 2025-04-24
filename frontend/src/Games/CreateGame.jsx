@@ -28,7 +28,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
       const text = await file.text();
       setNewGameJSON(text)
 
-    } catch (err) {
+    } catch {
       setErrorMessage("Failed to read or parse the file.")
       handleShowErrorPopup();
       return;
@@ -92,7 +92,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
     try {
       games.push(newGame);
       const token = localStorage.getItem('token');
-      const response = await axios.put(
+      await axios.put(
         'http://localhost:5005/admin/games',
         {
           games: games
@@ -163,25 +163,33 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
   return (
     <>
       <Modal show={show} onHide={handleCloseCreateModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create A New Game</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Label>Game Name</Form.Label>
-          <Form.Control type="Name" placeholder="Name of Your Game" value={newGameName} onChange={handleChange}/><br/>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Upload a JSON file of the game</Form.Label>
-            <Form.Control type="file" onChange={handleChangeJSON}/>
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseCreateModal}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={() => {createNewGame(), handleCloseCreateModal()}}>
-            Create Game
-          </Button>
-        </Modal.Footer>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            createNewGame();
+            handleCloseCreateModal();
+          }}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Create A New Game</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Label>Game Name</Form.Label>
+            <Form.Control type="Name" placeholder="Name of Your Game" value={newGameName} onChange={handleChange}/><br/>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Upload a JSON file of the game</Form.Label>
+              <Form.Control type="file" onChange={handleChangeJSON}/>
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseCreateModal}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={() => {createNewGame(), handleCloseCreateModal()}}>
+              Create Game
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
 
       <ErrorPopup

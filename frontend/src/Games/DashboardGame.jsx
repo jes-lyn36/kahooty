@@ -1,6 +1,5 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import ConfirmDelete from "./ConfirmDelete";
@@ -13,7 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
 import './DashboardGame.css';
 
-const DashboardGame = ({games, setGames, game, key}) => {
+const DashboardGame = ({games, setGames, game}) => {
   // Used for confirming a game deletion.
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
@@ -54,6 +53,7 @@ const DashboardGame = ({games, setGames, game, key}) => {
     return game.questions.length;
   }
 
+  // Counts and returns the total duration of the question.
   const totalDuration = () => {
     let totalDuration = 0;
     game.questions.forEach(question => {
@@ -65,7 +65,7 @@ const DashboardGame = ({games, setGames, game, key}) => {
   const startGameSession = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(
+      await axios.post(
         `http://localhost:5005/admin/game/${game.gameId}/mutate`,
         {
           mutationType: 'START'
@@ -87,7 +87,7 @@ const DashboardGame = ({games, setGames, game, key}) => {
   const stopGameSession = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(
+      await axios.post(
         `http://localhost:5005/admin/game/${game.gameId}/mutate`,
         {
           mutationType: 'END'
@@ -119,7 +119,8 @@ const DashboardGame = ({games, setGames, game, key}) => {
       });
       setSessionId(response.data.games.find((g) => g.gameId === game.gameId).active);
     } catch (err) {
-      console.log(err);
+      setErrorMessage(err.response?.data?.error);
+      handleShowErrorPopup();
     }
   }
 
@@ -131,7 +132,7 @@ const DashboardGame = ({games, setGames, game, key}) => {
   return (
     <>
       <Card id="dashboard-game-card" style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={game.thumbnail ? game.thumbnail : './src/assets/no_image.png'} />
+        <Card.Img variant="top" src={game.thumbnail ? game.thumbnail : './src/assets/no_image.png'} alt={game.thumbnail ? `${game.name} thumbnail` : 'No game image available'}/>
         <Card.Body>
           <Card.Title>{game.name}</Card.Title>
         </Card.Body>
@@ -145,8 +146,33 @@ const DashboardGame = ({games, setGames, game, key}) => {
           <Button variant="outline-secondary" onClick={stopGameSession} disabled={!sessionActive}> Stop Game Session </Button>
         </ListGroup>
         <Card.Body id="edit-delete-game">
-          <EditIcon onClick={() => navigate(`/game/${game.gameId}`)} />
-          <DeleteIcon onClick={handleShowConfirmDelete}/>
+          <div role="group" aria-label={`Actions for game ${game.name}`}>
+            <EditIcon 
+              role="button" 
+              aria-label={`Edit game ${game.name}`} 
+              tabIndex={0} 
+              onClick={() => navigate(`/game/${game.gameId}`)} 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  // Used to prevent page scroll on Space.
+                  e.preventDefault();
+                  navigate(`/game/${game.gameId}`);
+                }
+              }}
+            />
+            <DeleteIcon 
+              role="button" 
+              aria-label={`Delete game ${game.name}`} 
+              tabIndex={0} 
+              onClick={handleShowConfirmDelete}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleShowConfirmDelete();
+                }
+              }}
+            />
+          </div>
         </Card.Body>
       </Card>
       <AdminStartGamePopup 

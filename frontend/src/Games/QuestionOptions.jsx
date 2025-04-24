@@ -12,9 +12,10 @@ const QuestionOptions = ({question, handleQuestionChange}) => {
     <>
       <Grid size={3}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Type</InputLabel>
+          <InputLabel id="question-type-label">Type</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
+            labelId="question-type-label
+            "
             id="demo-simple-select"
             value={question?.type ?? "multiple_choice"}
             label="Type"

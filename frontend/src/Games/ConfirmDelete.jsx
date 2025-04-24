@@ -22,7 +22,7 @@ const ConfirmDelete = ({
       const newGames = games.filter((g) => g.gameId !== game.gameId);
 
       const token = localStorage.getItem('token');
-      const response = await axios.put(
+      await axios.put(
         'http://localhost:5005/admin/games',
         {games : newGames},
         {

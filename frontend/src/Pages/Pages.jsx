@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Link,
@@ -13,6 +12,7 @@ import Register from '../RegisterLogin/Register';
 import Login from '../RegisterLogin/Login';
 import Dashboard from '../Dashboard/Dashboard';
 import EditGame from '../Games/EditGame';
+import LandingPage from '../LandingPage/LandingPage';
 import SessionStart from '../Sessions/SessionStart';
 import SessionAdvanceResult from '../Sessions/SessionAdvanceResult';
 import PlayerPlayScreen from '../Players/PlayerPlayScreen';
@@ -40,7 +40,7 @@ const Pages = () => {
 
   const logout = async () => {
     try {
-      const response = await axios.post('http://localhost:5005/admin/auth/logout', {}, {
+      await axios.post('http://localhost:5005/admin/auth/logout', {}, {
         headers: {
           'Authorization': `Bearer ${token}`,
         }
@@ -56,23 +56,30 @@ const Pages = () => {
   return (
     <>
       {!isPlayerRoute && (
-        <>
+        <nav aria-label="User authentication methods">
           {token ? (
             <>
-              <Button id="logout-button" variant="outline-primary" onClick={logout}>Logout</Button>
+              <Button 
+                id="logout-button" 
+                variant="outline-primary" 
+                onClick={logout} 
+                aria-label="Log out of your account"
+              >
+                Logout
+              </Button>
             </>
           ) : (
-            <>
-              <Link to="/register">Register</Link>
-              &nbsp;|&nbsp;
-              <Link to="/login">Login</Link>
-            </>
+            <nav aria-label="User authentication" id="auth-nav">
+              <Link to="/register" className="auth-link">Register</Link>
+              <span id="auth-separator">|</span>
+              <Link to="/login" className="auth-link">Login</Link>
+            </nav>
           )}
           <hr />
-        </>
+        </nav>
       )}
       <Routes>
-        <Route path="/" element={<Register token={token} successJob={successJob} />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register token={token} successJob={successJob} />} />
         <Route path="/login" element={<Login token={token} successJob={successJob} />} />
         <Route path="/dashboard" element={<Dashboard />} />

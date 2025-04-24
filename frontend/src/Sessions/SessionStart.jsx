@@ -28,6 +28,12 @@ const SessionStart = () => {
   }, [sessionId]);
 
   const joinGame = async () => {
+    if (!name) {
+      setErrorMessage("Name must be a valid, non-empty string.");
+      handleShowErrorPopup();
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(`http://localhost:5005/play/join/${inputSessionId}`, 
@@ -51,26 +57,35 @@ const SessionStart = () => {
     <div className="general-style">
       <h1>Session Start Screen</h1>
       <hr/>
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Session Id</InputGroup.Text>
-        <Form.Control
-          placeholder="12345"
-          aria-label="Your Session Id"
-          aria-describedby="basic-addon1"
-          value={sessionId}
-          onChange={(e) => setInputSessionId(e.target.value)}
-        />
-      </InputGroup>
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Name</InputGroup.Text>
-        <Form.Control
-          placeholder=""
-          aria-label="Name123"
-          aria-describedby="basic-addon1"
-          onChange={(e) => setName(e.target.value)}
-        />
-      </InputGroup>
-      <Button variant="secondary" onClick={joinGame}>Submit</Button>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          joinGame();
+        }}
+      >
+        <InputGroup className="mb-3">
+          <InputGroup.Text id="session-start-sessionId">Session Id</InputGroup.Text>
+          <Form.Control
+            placeholder="12345"
+            aria-label="Your Session Id"
+            aria-describedby="session-start-sessionId"
+            value={sessionId}
+            type="text"
+            onChange={(e) => setInputSessionId(e.target.value)}
+          />
+        </InputGroup>
+        <InputGroup className="mb-3">
+          <InputGroup.Text id="session-start-name">Name</InputGroup.Text>
+          <Form.Control
+            type="text"
+            placeholder=""
+            aria-label="Name123"
+            aria-describedby="session-start-name"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </InputGroup>
+        <Button type="submit" variant="secondary" onClick={joinGame}>Submit</Button>
+      </Form>
 
       <ErrorPopup
         errorMessage={errorMessage}

@@ -56,20 +56,27 @@ const Pages = () => {
   return (
     <>
       {!isPlayerRoute && (
-        <>
+        <nav aria-label="User authentication methods">
           {token ? (
             <>
-              <Button id="logout-button" variant="outline-primary" onClick={logout}>Logout</Button>
+              <Button 
+                id="logout-button" 
+                variant="outline-primary" 
+                onClick={logout} 
+                aria-label="Log out of your account"
+              >
+                Logout
+              </Button>
             </>
           ) : (
-            <>
-              <Link to="/register">Register</Link>
-              &nbsp;|&nbsp;
-              <Link to="/login">Login</Link>
-            </>
+            <nav aria-label="User authentication" id="auth-nav">
+              <Link to="/register" className="auth-link">Register</Link>
+              <span id="auth-separator">|</span>
+              <Link to="/login" className="auth-link">Login</Link>
+            </nav>
           )}
           <hr />
-        </>
+        </nav>
       )}
       <Routes>
         <Route path="/" element={<LandingPage />} />

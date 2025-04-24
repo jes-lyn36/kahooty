@@ -88,12 +88,18 @@ const SessionAdvanceResult = () => {
   }
 
   return (
-    <>
+    <main>
       <h1>Advance Result screen</h1>
       <hr/>
-      <Button onClick={() => navigate('/Dashboard')}>Back to Dashboard</Button>
-      <Button onClick={advanceGameSession} disabled={!sessionActive}>Advance</Button>
-      <Button variant="outline-secondary" onClick={stopGameSession} disabled={!sessionActive}>
+      <Button aria-label="Go back to dashboard" onClick={() => navigate('/Dashboard')}>Back to Dashboard</Button>
+      <Button aria-label="Advance to the next stage of the game" onClick={advanceGameSession} disabled={!sessionActive}>Advance</Button>
+      <Button 
+        aria-label={sessionActive ? "Stop the game session" : "Session has already ended"}
+        aria-live="polite" 
+        variant="outline-secondary" 
+        onClick={stopGameSession} 
+        disabled={!sessionActive}
+      >
         {sessionActive ? <>Stop Game Session</> : <>Session Ended</>}
       </Button>
 
@@ -102,7 +108,7 @@ const SessionAdvanceResult = () => {
         showErrorPopup={showErrorPopup}
         handleCloseErrorPopup={handleCloseErrorPopup}
       />
-    </>
+    </main>
   )
 }
 

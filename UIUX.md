@@ -23,8 +23,13 @@ Made a popup modal for errors instead of using alerts for better user experience
 3. Playing the game :
 Made the background for player waiting screen darker so the text would be more readable.
 
+Made a spinner on the player wait screen before playing a game to indicate the player to wait.
+
 4. Dashboard :
 Made the game cards fill the screen as a grid so the user would be able to see more cards more efficiently.
 
 5. Login/Register :
 Made a landing page before the register or login page for better user experience and recognisability.
+
+Made the login link in the top of the login/register and landing page centred for better style.
+Made the register link in the top of the login/register and landing page centred for better style.

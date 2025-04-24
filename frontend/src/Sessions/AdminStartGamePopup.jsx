@@ -6,14 +6,19 @@ import './AdminStartGamePopup.css';
 const AdminStartGamePopup = ({sessionId, showStartGameSession, handleCloseStartGameSession}) => {
   return (
     <>
-      <Modal show={showStartGameSession} onHide={handleCloseStartGameSession}>
+      <Modal 
+        show={showStartGameSession} 
+        onHide={handleCloseStartGameSession}
+        aria-labelledby="start-session-title"
+        aria-describedby="start-session-description"
+      >
         <Modal.Header closeButton>
-          <Modal.Title>New game session started!</Modal.Title>
+          <Modal.Title id="start-session-title">New game session started!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body id="start-session-description">
           Game SessionId: {sessionId}{' '}
           <CopyToClipboard text={`http://localhost:3000/play/join/${sessionId}`}>
-            <span className="copy-link">(Copy Link)</span>
+            <span className="copy-link" aria-label="Copy game session link to clipboard">(Copy Link)</span>
           </CopyToClipboard>
         </Modal.Body>
         <Modal.Footer>

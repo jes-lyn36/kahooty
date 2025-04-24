@@ -252,9 +252,9 @@ const EditGame = () => {
   return (
     <div className="side-spacing">
       <h1>Edit Game</h1>
-      <Button variant="secondary" onClick={() => navigate('/dashboard')}>Back to Games</Button>
+      <Button aria-label="Go back to games" variant="secondary" onClick={() => navigate('/dashboard')}>Back to Games</Button>
       <span>&nbsp;&nbsp;&nbsp;</span>
-      <Button variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button><br/>
+      <Button aria-label="Confirm and save changes" variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button><br/>
       <hr/><br/>
       <TextField fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
 

@@ -25,7 +25,7 @@ const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, ed
           {
             answers?.map((answer, index) => (
               <ListItem secondaryAction={
-                <IconButton edge="end" aria-label="delete" onClick={() => deleteAnswer(answer.answerId)}>
+                <IconButton edge="end" aria-label={`Delete answer ${index + 1}`} onClick={() => deleteAnswer(answer.answerId)}>
                   <DeleteIcon />
                 </IconButton>
               }
@@ -40,8 +40,7 @@ const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, ed
         </List>
         {
           question?.type !== "judgement" ? 
-            <Button variant="primary" onClick={() => addAnswer()}>Add Answer</Button> :
-            <></>
+            <Button aria-label="Add an answer option" variant="primary" onClick={() => addAnswer()}>Add Answer</Button> : <></>
         }
       </Grid>
     </>

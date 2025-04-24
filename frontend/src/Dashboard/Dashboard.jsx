@@ -35,20 +35,20 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="side-spacing">
+      <div className="side-spacing" role="region" aria-label="Dashboard header and create button">
         <h1>Dashboard</h1>
         <hr/>
-        <Button id="create-game-button" variant="secondary" onClick={handleShowCreateModal}>Create Game</Button>
+        <Button id="create-game-button" variant="secondary" onClick={handleShowCreateModal} aria-label="Create a new game">Create Game</Button>
       </div>
       <CreateGame show={ShowCreateModal} handleCloseCreateModal={handleCloseCreateModal} setGames={setGames} games={games}></CreateGame>
-      <div id="dashboard-games">
+      <div id="dashboard-games" role="region" aria-label="List of games">
         {games.length > 0 ? (
           games.map((game, index) => (
             <DashboardGame games={games} setGames={setGames} game={game} key={index}></DashboardGame>
           ))
-        ) :
+        ) : (
           <p>No games owned by the account...</p>
-        }
+        )}
       </div>
     </>
   )

@@ -132,7 +132,7 @@ const DashboardGame = ({games, setGames, game}) => {
   return (
     <>
       <Card id="dashboard-game-card" style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={game.thumbnail ? game.thumbnail : './src/assets/no_image.png'} />
+        <Card.Img variant="top" src={game.thumbnail ? game.thumbnail : './src/assets/no_image.png'} alt={game.thumbnail ? `${game.name} thumbnail` : 'No game image available'}/>
         <Card.Body>
           <Card.Title>{game.name}</Card.Title>
         </Card.Body>
@@ -146,8 +146,33 @@ const DashboardGame = ({games, setGames, game}) => {
           <Button variant="outline-secondary" onClick={stopGameSession} disabled={!sessionActive}> Stop Game Session </Button>
         </ListGroup>
         <Card.Body id="edit-delete-game">
-          <EditIcon onClick={() => navigate(`/game/${game.gameId}`)} />
-          <DeleteIcon onClick={handleShowConfirmDelete}/>
+          <div role="group" aria-label={`Actions for game ${game.name}`}>
+            <EditIcon 
+              role="button" 
+              aria-label={`Edit game ${game.name}`} 
+              tabIndex={0} 
+              onClick={() => navigate(`/game/${game.gameId}`)} 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  // Used to prevent page scroll on Space.
+                  e.preventDefault();
+                  navigate(`/game/${game.gameId}`);
+                }
+              }}
+            />
+            <DeleteIcon 
+              role="button" 
+              aria-label={`Delete game ${game.name}`} 
+              tabIndex={0} 
+              onClick={handleShowConfirmDelete}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleShowConfirmDelete();
+                }
+              }}
+            />
+          </div>
         </Card.Body>
       </Card>
       <AdminStartGamePopup 

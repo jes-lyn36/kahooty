@@ -56,7 +56,8 @@ const RegisterLogin = ({ successJob, token, name}) => {
             <InputGroup.Text id="basic-addon1">Email </InputGroup.Text>
             <Form.Control value={email} onChange={e => setEmail(e.target.value)}
               placeholder="123@email.com"
-              aria-label="Username"
+              aria-label="Email"
+              type="email"
               aria-describedby="basic-addon1"
             />
           </InputGroup>
@@ -64,7 +65,7 @@ const RegisterLogin = ({ successJob, token, name}) => {
             <InputGroup.Text id="basic-addon1">Password </InputGroup.Text>
             <Form.Control value={password} onChange={e => setPassword(e.target.value)}
               placeholder="Password123"
-              aria-label="Username"
+              aria-label="Password"
               aria-describedby="basic-addon1"
               type="password"
             />
@@ -77,12 +78,13 @@ const RegisterLogin = ({ successJob, token, name}) => {
                 <Form.Control value={userName} onChange={e => setUserName(e.target.value)}
                   placeholder="Your display name"
                   aria-label="Username"
+                  type="username"
                   aria-describedby="basic-addon1"
                 />
               </InputGroup>
 
               <InputGroup className="mb-3">
-                <InputGroup.Text id="basic-addon1">Confirm</InputGroup.Text>
+                <InputGroup.Text id="basic-addon1">Confirm Password</InputGroup.Text>
                 <Form.Control value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
                   placeholder="Confirm password"
                   aria-label="Confirm password"

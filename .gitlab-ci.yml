@@ -5,4 +5,9 @@ linechecking:
   stage: checks
   script:
     - bash ./util/pre-commit.sh
+
+lint:
+  stage: checks
+  script:
+    - npm install
     - npm run lint

@@ -30,3 +30,9 @@
 #player-wait-text {
 	font-size: clamp(30px, 5vw, 50px);
 }
+
+#player-wait-spinner {
+  margin-top: 15px;
+  width: 100px;;
+  height: 100px;;
+}

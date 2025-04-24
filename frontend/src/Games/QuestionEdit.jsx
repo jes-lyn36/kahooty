@@ -24,27 +24,25 @@ const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, ed
         <List component="nav" aria-label="main mailbox folders" sx={{ width: '100%'}}>
           {
             answers?.map((answer, index) => (
-            <ListItem secondaryAction={
-              <IconButton edge="end" aria-label="delete" onClick={() => deleteAnswer(answer.answerId)}>
-                <DeleteIcon />
-              </IconButton>
-            }
-            disablePadding
-            key={index}
-            >
-              <TextField label={`Answer ${index + 1}`} variant="standard" value={answer.answer} onChange={(e) => editAnswer(index, e.target.value)}/>
-              <Checkbox checked={question?.correctAnswers?.includes(answer.answerId)} disabled ={disableAnswers(answer.answerId)} onChange={(e) => addCorrectAnswer(answer.answerId, e.target.checked)}/>
-            </ListItem>
+              <ListItem secondaryAction={
+                <IconButton edge="end" aria-label={`Delete answer ${index + 1}`} onClick={() => deleteAnswer(answer.answerId)}>
+                  <DeleteIcon />
+                </IconButton>
+              }
+              disablePadding
+              key={index}
+              >
+                <TextField label={`Answer ${index + 1}`} variant="standard" value={answer.answer} onChange={(e) => editAnswer(index, e.target.value)}/>
+                <Checkbox checked={question?.correctAnswers?.includes(answer.answerId)} disabled ={disableAnswers(answer.answerId)} onChange={(e) => addCorrectAnswer(answer.answerId, e.target.checked)}/>
+              </ListItem>
             ))
           }
         </List>
         {
           question?.type !== "judgement" ? 
-          <Button variant="primary" onClick={() => addAnswer()}>Add Answer</Button>
-          :
-          <></>
+            <Button aria-label="Add an answer option" variant="primary" onClick={() => addAnswer()}>Add Answer</Button> : <></>
         }
-    </Grid>
+      </Grid>
     </>
   )
 

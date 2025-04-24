@@ -16,10 +16,18 @@ const SessionResultPopup = ({sessionId, showResultPopup, handleCloseResultPopup,
       </Modal.Header>
       <Modal.Body>Would you like to view the results?</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseResultPopup}>
+        <Button 
+          variant="secondary" 
+          onClick={handleCloseResultPopup} 
+          aria-label="Close result popup"
+        >
           Close
         </Button>
-        <Button variant="secondary" onClick={resultScreen}>
+        <Button 
+          variant="secondary" 
+          onClick={resultScreen} 
+          aria-label="Navigate to session results screen"
+        >
           View Results
         </Button>
       </Modal.Footer>

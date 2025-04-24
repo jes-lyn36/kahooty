@@ -2,26 +2,23 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import './AdminStartGamePopup.css';
-import { useState } from "react";
 
-const AdminStartGamePopup = ({sessionId, showStartGameSession, handleCloseStartGameSession, gameId}) => {
-  const [copied, setCopied] = useState(false);
-  
-  let state = {
-    value: '',
-    copied: false,
-  };
-
+const AdminStartGamePopup = ({sessionId, showStartGameSession, handleCloseStartGameSession}) => {
   return (
     <>
-      <Modal show={showStartGameSession} onHide={handleCloseStartGameSession}>
+      <Modal 
+        show={showStartGameSession} 
+        onHide={handleCloseStartGameSession}
+        aria-labelledby="start-session-title"
+        aria-describedby="start-session-description"
+      >
         <Modal.Header closeButton>
-          <Modal.Title>New game session started!</Modal.Title>
+          <Modal.Title id="start-session-title">New game session started!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body id="start-session-description">
           Game SessionId: {sessionId}{' '}
-          <CopyToClipboard text={`http://localhost:3000/play/join/${sessionId}`} onCopy={() => setCopied(true)}>
-            <span className="copy-link">(Copy Link)</span>
+          <CopyToClipboard text={`http://localhost:3000/play/join/${sessionId}`}>
+            <span className="copy-link" aria-label="Copy game session link to clipboard">(Copy Link)</span>
           </CopyToClipboard>
         </Modal.Body>
         <Modal.Footer>

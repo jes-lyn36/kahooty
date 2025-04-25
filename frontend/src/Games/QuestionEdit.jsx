@@ -1,6 +1,5 @@
 import Button from 'react-bootstrap/Button';
 import List from '@mui/material/List';
-import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
@@ -49,40 +48,38 @@ const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, ed
 
   return (
     <>
-      <Grid size={6}>
-        <TextField id="question-title-intput" fullWidth label="Question title" value={question?.question} onChange={(e) => handleQuestionChange("question", e.target.value)}></TextField>
-        
-        {question && question.attachmentType === "img" ? (
-          <Form.Group controlId="formFile">
-            <Form.Label>Image attachment</Form.Label>
-            <Form.Control type="file" accept="image/png, image/jpeg, image/png" onChange={(e) => handleFileChange(e)}/>
-          </Form.Group>
-        ) : question && question.attachmentType === "youtube" && (
-          <TextField label={`Youtube link`} variant="standard" value={question.attachment} onChange={(e) => handleQuestionChange("attachment", e.target.value)}/>
-        )}
+      <TextField slotProps={{ inputLabel: { shrink: true } }} id="question-title-input" fullWidth label="Question title" value={question?.question ? question?.question : ""} onChange={(e) => handleQuestionChange("question", e.target.value)}></TextField>
+      
+      {question && question.attachmentType === "img" ? (
+        <Form.Group controlId="formFile">
+          <Form.Label>Image attachment</Form.Label>
+          <Form.Control type="file" accept="image/png, image/jpeg, image/png" onChange={(e) => handleFileChange(e)}/>
+        </Form.Group>
+      ) : question && question.attachmentType === "youtube" && (
+        <TextField slotProps={{ inputLabel: { shrink: true } }} label={`Youtube link`} variant="standard" value={question.attachment} onChange={(e) => handleQuestionChange("attachment", e.target.value)}/>
+      )}
 
-        <List component="nav" aria-label="main mailbox folders" sx={{ width: '100%'}}>
-          {
-            answers?.map((answer, index) => (
-              <ListItem secondaryAction={
-                <IconButton edge="end" aria-label={`Delete answer ${index + 1}`} onClick={() => deleteAnswer(answer.answerId)}>
-                  <DeleteIcon />
-                </IconButton>
-              }
-              disablePadding
-              key={index}
-              >
-                <TextField label={`Answer ${index + 1}`} variant="standard" value={answer.answer} onChange={(e) => editAnswer(index, e.target.value)}/>
-                <Checkbox checked={question?.correctAnswers?.includes(answer.answerId)} disabled ={disableAnswers(answer.answerId)} onChange={(e) => addCorrectAnswer(answer.answerId, e.target.checked)}/>
-              </ListItem>
-            ))
-          }
-        </List>
+      <List component="nav" aria-label="main mailbox folders" sx={{ width: '100%'}}>
         {
-          question?.type !== "judgement" ? 
-            <Button role="button" aria-label="Add an answer option" variant="primary" onClick={() => addAnswer()}>Add Answer</Button> : <></>
+          answers?.map((answer, index) => (
+            <ListItem secondaryAction={
+              <IconButton edge="end" aria-label={`Delete answer ${index + 1}`} onClick={() => deleteAnswer(answer.answerId)}>
+                <DeleteIcon />
+              </IconButton>
+            }
+            disablePadding
+            key={index}
+            >
+              <TextField slotProps={{ inputLabel: { shrink: true } }} label={`Answer ${index + 1}`} variant="standard" value={answer.answer} onChange={(e) => editAnswer(index, e.target.value)}/>
+              <Checkbox checked={question?.correctAnswers?.includes(answer.answerId)} disabled ={disableAnswers(answer.answerId)} onChange={(e) => addCorrectAnswer(answer.answerId, e.target.checked)}/>
+            </ListItem>
+          ))
         }
-      </Grid>
+      </List>
+      {
+        question?.type !== "judgement" ? 
+          <Button role="button" aria-label="Add an answer option" variant="primary" onClick={() => addAnswer()}>Add Answer</Button> : <></>
+      }
     </>
   )
 

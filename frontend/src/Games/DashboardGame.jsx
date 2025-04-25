@@ -148,7 +148,13 @@ const DashboardGame = ({games, setGames, game}) => {
         <ListGroup className="list-group-flush">
           <ListGroup.Item>Number of questions: {totalQuestion()}</ListGroup.Item>
           <ListGroup.Item>Total duration: {totalDuration()}</ListGroup.Item>
-          <Button name="Start Game Session" variant="outline-secondary" onClick={startGameSession} disabled={sessionActive}>
+          <Button 
+            name="Start Game Session" 
+            variant="outline-secondary" 
+            onClick={startGameSession} 
+            disabled={sessionActive}
+            aria-label={`Start Game Session ${game.name}`}
+          >
             {!sessionActive ? <>Start Game Session</> : <>Session Started</>}
           </Button>
           <Button 
@@ -156,16 +162,19 @@ const DashboardGame = ({games, setGames, game}) => {
             variant="outline-secondary" 
             onClick={() => {navigate(`/session/${sessionId}`, { state: { game } }); console.log(game)}} 
             disabled={!sessionActive}
+            aria-label={`Modify Game Session ${game.name}`}
           > Modify Game Session </Button>
           <Button 
             name="Stop Game Session" 
             variant="outline-secondary" 
             onClick={stopGameSession} 
             disabled={!sessionActive}
+            aria-label={`Stop Game Session ${game.name}`}
           > Stop Game Session </Button>
           <Button 
             variant="outline-secondary"
             onClick={handleShowPastSessionResults}
+            aria-label={`Show Past Game Session ${game.name}`}
           > Show Past Session Results</Button>
         </ListGroup>
 

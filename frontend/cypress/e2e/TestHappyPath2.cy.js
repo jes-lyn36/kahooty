@@ -63,6 +63,7 @@ window.describe('Landing Page, Register, and Login page including errors', () =>
 
     window.cy.get('#create-new-game').click();
 
+    // Edit the game
     window.cy.get('[aria-label="Edit game new game 1"]').click();
 
     window.cy.url().should('include', '/question');

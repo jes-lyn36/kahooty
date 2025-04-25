@@ -42,6 +42,21 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
     }
   }
 
+  const addIdsToGame = (game) => {
+    return {
+      ...game,
+      gameId: generateRandomNumber(),
+      questions: game.questions.map((q) => ({
+        ...q,
+        questionId: generateRandomNumber(),
+        answers: q.answers.map((a) => ({
+          ...a,
+          answerId: generateRandomNumber(),
+        })),
+      })),
+    };
+  }
+
   const createNewGame = async () => {
     if (newGameName === "" && newGameJSON == "") {
       clearFormData();
@@ -90,8 +105,9 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
     } else {
       try {
         const jsonData = JSON.parse(newGameJSON);
+
         if (validateJSON(jsonData)) {
-          newGame = jsonData;
+          newGame = addIdsToGame(jsonData);
         } else {
           clearFormData();
           setErrorMessage("The JSON file is not in the correct format for a game.")

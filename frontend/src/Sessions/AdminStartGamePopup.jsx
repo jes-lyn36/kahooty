@@ -7,6 +7,7 @@ const AdminStartGamePopup = ({sessionId, showStartGameSession, handleCloseStartG
   return (
     <>
       <Modal 
+        id="admin-start-game-session-popup"
         show={showStartGameSession} 
         onHide={handleCloseStartGameSession}
         aria-labelledby="start-session-title"
@@ -22,7 +23,7 @@ const AdminStartGamePopup = ({sessionId, showStartGameSession, handleCloseStartG
           </CopyToClipboard>
         </Modal.Body>
         <Modal.Footer>
-          <Button data-testid="close-start-game-popup" variant="secondary" onClick={handleCloseStartGameSession}>
+          <Button role="button" data-testid="close-start-game-popup" variant="secondary" onClick={handleCloseStartGameSession}>
             Close
           </Button>
         </Modal.Footer>

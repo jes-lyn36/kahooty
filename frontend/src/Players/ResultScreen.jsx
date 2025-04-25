@@ -27,13 +27,11 @@ const ResultScreen = ({results}) => {
         const timeTaken = calculateTimeTaken(result.questionStartedAt, result.answeredAt);
 
         const point = result.correct ? sessionStorage.getItem(String(index)) : 0;
-        // const pointsGained = point * timeTaken / 
 
         const duration = sessionStorage.getItem(String(index) + "-duration");
         const pointsGained = (point * (duration - timeTaken) / duration).toFixed(1);
 
         totalPoints += parseFloat(pointsGained);
-        console.log(pointsGained)
 
         const paddedIndex = String(index + 1).padEnd(2);
         const paddedTime = `(${timeTaken} s)`.padEnd(8);

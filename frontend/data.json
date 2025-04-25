@@ -13,6 +13,7 @@
           "duration": 10,
           "type": "multiple_choice",
           "points": 2,
+          "attachmentType": "youtube",
           "attachment": "https://youtu.be/Ui09cCfXAVo?si=mXXbB_eEpzxY0YyH",
           "correctAnswers": [
             200, 201
@@ -34,6 +35,7 @@
           "duration": 10,
           "type": "single_choice",
           "points": 1,
+          "attachmentType": "youtube",
           "attachment": "https://youtu.be/_XeUEoDEc00?si=iG6jSnLokvcc7Kzz",
           "correctAnswers": [
             203
@@ -64,6 +66,7 @@
           "duration": 10,
           "type": "single_choice",
           "points": 3,
+          "attachmentType": "youtube",
           "attachment": "https://youtu.be/GJIyZAd9srs?si=ZOPT4RL0-YcmdPJj",
           "correctAnswers": [
             209
@@ -85,6 +88,7 @@
           "duration": 15,
           "type": "judgement",
           "points": 4,
+          "attachmentType": "youtube",
           "attachment": "https://youtu.be/m6XcAmIuG1g?si=oDTPpzZUgn5r0vEP",
           "correctAnswers": [
             210, 211

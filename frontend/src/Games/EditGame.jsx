@@ -9,6 +9,8 @@ import QuestionEdit from './QuestionEdit';
 import QuestionOptions from './QuestionOptions';
 import './EditGame.css';
 import ErrorPopup from '../ErrorPopup';
+import Form from 'react-bootstrap/Form';
+
 
 const EditGame = () => {
   // Used to show error popup messages.
@@ -115,6 +117,10 @@ const EditGame = () => {
           answer: "False"
         }
       ]
+    }
+
+    if (changedKey === "attachmentType") {
+      result.attachment = "";
     }
 
     setQuestion(result);
@@ -274,6 +280,34 @@ const EditGame = () => {
     setAnswers([...answerRemoved]);
     setQuestion({...question, answers: answerRemoved});
   }
+
+    const fileToDataUrl = (file) => {
+      const validFileTypes = [ 'image/jpeg', 'image/png', 'image/jpg' ]
+      const valid = validFileTypes.find(type => type === file.type);
+      // Bad data, let's walk away.
+      if (!valid) {
+          throw Error('provided file is not a png, jpg or jpeg image.');
+      }
+      
+      const reader = new FileReader();
+      const dataUrlPromise = new Promise((resolve,reject) => {
+          reader.onerror = reject;
+          reader.onload = () => resolve(reader.result);
+      });
+      reader.readAsDataURL(file);
+      return dataUrlPromise;
+    }
+  
+    const handleFileChange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+    
+      const extension = file.type.split('/')[1]; // e.g., 'jpg' or 'png'
+      const renamedFile = new File([file], `image.${extension}`, { type: file.type });
+    
+      const dataUrl = await fileToDataUrl(renamedFile);
+      handleGameChange("thumbnail", dataUrl);
+    };
   
   return (
     <div className="side-spacing">
@@ -283,6 +317,10 @@ const EditGame = () => {
       <Button role="button" aria-label="Confirm and save changes" variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button><br/>
       <hr/><br/>
       <TextField id="input-new-game-title" fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
+      <Form.Group controlId="formFile">
+        <Form.Label>Change Thumbnail</Form.Label>
+        <Form.Control type="file" accept="image/png, image/jpeg, image/png" onChange={(e) => handleFileChange(e)}/>
+      </Form.Group>
 
       <Grid container spacing={2} mt={2}>
         <QuestionNav

@@ -132,6 +132,32 @@ const EditGame = () => {
     saveAnswers();
     saveQuestion();
     saveGame();
+
+    // Make the game has a title.
+    if (game.name === "") {
+      setErrorMessage('Game title cannot be an empty string.');
+      handleShowErrorPopup();
+      return;
+    }
+
+    // Make sure none of the questions are empty.
+    if (game.questions.some((q) => q.question === "")) {
+      setErrorMessage('Game questions cannot be an empty string.');
+      handleShowErrorPopup();
+      return;
+    }
+
+    const hasEmptyAnswer = game.questions.some((q) =>
+      q.answers.some((a) => a.answer.trim() === "")
+    );
+    
+    // Make sure none of the answer options are empty.
+    if (hasEmptyAnswer) {
+      setErrorMessage('Answers cannot be empty.');
+      handleShowErrorPopup();
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       await axios.put('http://localhost:5005/admin/games', { 

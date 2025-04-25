@@ -16,8 +16,6 @@ Made start game button disabled when the game has been started in DashboardGame.
 
 Made Start "Game Session button" turn to "Session Started" when the game is started in DashboardGame.
 
-Added a check for whether or not the file is a json file when creating a new game.
-
 2. Register/Login :
 Made a landing page with a title and description to start when the user goes to the website.
 Added a picture to the landing page taken straight from Kahoot.
@@ -55,3 +53,20 @@ Made an error message to the player to inform that they can't join a game when i
 
 Player will get an error if they input an empty string as their name.
 Player will not be able to edit the sessionId if it's copied from the given link.
+
+5. Create a new game :
+Added a check to return error message for whether or not the file is a json file when creating a new game.
+Added a chcek to return error message if the JSON file does not comply with the game data.
+
+Added a check so the user can't enter an empty input for both the game title and game json file.
+Added a check so the user can't enter a non-empty input for both the game title and game json file.
+
+For the JSON file, no need to input gameId as the front end generates a new number for it.
+For the JSON file, no need to input questionIds as the front end generates a new number for it.
+For the JSON file, no need to input AnswerIds as the front end generates a new number for it.
+
+6. Edit a game :
+Added a check to make sure that the game has a non-empty title.
+Added a check to make sure that all the game questions has a non-empty title.
+Added a check to make sure that all the answer options of the game is non-empty.
+

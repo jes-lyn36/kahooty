@@ -30,6 +30,9 @@ Made the game cards fill the screen as a grid so the user would be able to see m
 
 5. Login/Register :
 Made a landing page before the register or login page for better user experience and recognisability.
+Made a decor picture in the landing page.
+Made a title on the landing page with bold blue text that really captures the eye or something.
+Made the background a gradient of blue.
 
 Made the login link in the top of the login/register and landing page centred for better style.
 Made the register link in the top of the login/register and landing page centred for better style.

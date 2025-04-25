@@ -139,7 +139,7 @@ const DashboardGame = ({games, setGames, game}) => {
   return (
     <>
       <Card id="dashboard-game-card" style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={game.thumbnail ? game.thumbnail : './src/assets/no_image.png'} alt={game.thumbnail ? `${game.name} thumbnail` : 'No game image available'}/>
+        <Card.Img variant="top" src={!game.thumbnail || game.thumbnail === "" ? './src/assets/no_image.png' : game.thumbnail} alt={game.thumbnail ? `${game.name} thumbnail` : 'No game image available'}/>
         
         <Card.Body>
           <Card.Title>{game.name}</Card.Title>

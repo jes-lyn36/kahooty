@@ -79,6 +79,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
         "gameId": generateRandomNumber(),
         "name": newGameName,
         "owner": email,
+        "thumbnail": "",
         "active": 0,
         "questions": [
           {
@@ -87,6 +88,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
             "duration": 1,
             "type": "multiple_choice",
             "points": 1,
+            "attachmentType": "none",
             "attachment": "",
             "correctAnswers": [],
             "answers": [

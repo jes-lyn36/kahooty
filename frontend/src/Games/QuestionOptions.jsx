@@ -26,6 +26,21 @@ const QuestionOptions = ({question, handleQuestionChange}) => {
             <MenuItem value={"judgement"}>Judgement</MenuItem>
           </Select>
         </FormControl>
+        <FormControl sx={{ my: 2 }} fullWidth>
+          <InputLabel id="question-type-label">Attachment</InputLabel>
+          <Select
+            labelId="question-type-label
+            "
+            id="demo-simple-select"
+            value={question?.attachmentType ?? ""}
+            label="Type"
+            onChange={(e) => handleQuestionChange("attachmentType", e.target.value)}
+          >
+            <MenuItem value={"none"}>None</MenuItem>
+            <MenuItem value={"youtube"}>Youtube</MenuItem>
+            <MenuItem value={"img"}>Image</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           id="question-duration"
           label="Duration"
@@ -40,7 +55,7 @@ const QuestionOptions = ({question, handleQuestionChange}) => {
           type="number"
           variant="standard"
           value={question.points ?? ""}
-          onChange={(e) => handleQuestionChange("points", parseInt(e.target.value))}
+          onChange={(e) => handleQuestionChange("points", e.target.value)}
         />
       </Grid>
     </>

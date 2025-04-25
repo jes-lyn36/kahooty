@@ -1,5 +1,5 @@
-describe('Landing Page, Register, and Login page including errors', () => {
-  it('should navigate from the landing to register page.', () => {
+window.describe('Landing Page, Register, and Login page including errors', () => {
+  window.it('should navigate from the landing to register page.', () => {
     window.cy.visit('localhost:3000/');
     window.cy.url().should('eq', 'http://localhost:3000/');
 
@@ -7,7 +7,7 @@ describe('Landing Page, Register, and Login page including errors', () => {
     window.cy.url().should('include', '/register');
   })
 
-  it('should input different passwords and fail to register.', () => {
+  window.it('should input different passwords and fail to register.', () => {
     window.cy.visit('http://localhost:3000/register');
 
     window.cy.get("#email-input").type("email4");
@@ -19,7 +19,7 @@ describe('Landing Page, Register, and Login page including errors', () => {
     window.cy.get("#error-popup").should("be.visible");
   })
 
-  it('should register a new user, then logout', () => {
+  window.it('should register a new user, then logout', () => {
     window.cy.visit('http://localhost:3000/register');
 
     // This email needs to be changed every run of the test.
@@ -36,7 +36,7 @@ describe('Landing Page, Register, and Login page including errors', () => {
     window.cy.url().should('include', '/login');
   })
 
-  it('should make an invalid login.', () => {
+  window.it('should make an invalid login.', () => {
     window.cy.visit('http://localhost:3000/login');
 
     window.cy.get("#email-input").type("najsknfjkasdf");
@@ -46,7 +46,7 @@ describe('Landing Page, Register, and Login page including errors', () => {
     window.cy.get("#error-popup").should("be.visible");
   })
 
-  it('should make a valid login and create->edit->delete a game.', () => {
+  window.it('should make a valid login and create->edit->delete a game.', () => {
     window.cy.visit('http://localhost:3000/login');
 
     window.cy.get("#email-input").type("email23");
@@ -63,7 +63,7 @@ describe('Landing Page, Register, and Login page including errors', () => {
 
     window.cy.get('#create-new-game').click();
 
-    cy.get('[aria-label="Edit game new game 1"]').click();
+    window.cy.get('[aria-label="Edit game new game 1"]').click();
 
     window.cy.url().should('include', '/question');
 
@@ -71,23 +71,23 @@ describe('Landing Page, Register, and Login page including errors', () => {
     window.cy.get('#input-new-game-title').type("new game 2");
 
     // Add new question
-    cy.contains('[role="button"]', 'Add Question').click();
+    window.cy.contains('[role="button"]', 'Add Question').click();
 
     // Add question title for question 1
     window.cy.get('#question-title-intput').type("new question 2");
 
     // Add new answer option
-    cy.contains('[role="button"]', 'Add Answer').click();
+    window.cy.contains('[role="button"]', 'Add Answer').click();
 
     // Change question duration and points
     window.cy.get('#question-duration').type("10");
     window.cy.get('#question-points').type("3");
 
     // Confirm changes
-    cy.contains('[role="button"]', 'Confirm Changes').click();
+    window.cy.contains('[role="button"]', 'Confirm Changes').click();
   
     // Delete the new game
-    cy.get('[aria-label="Delete game new game 1new game 2"]').click();
+    window.cy.get('[aria-label="Delete game new game 1new game 2"]').click();
 
     // Confirm delete the game
     window.cy.get("#confirm-delete-popup").should("be.visible");

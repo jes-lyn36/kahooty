@@ -29,7 +29,8 @@ const PlayerPlayScreen = () => {
 
         setIndex(prev => {
           const newIndex = prev + 1;
-          sessionStorage.setItem(String(prev), String(response.data.question.points));
+          sessionStorage.setItem(String(prev), response.data.question.points);
+          sessionStorage.setItem(String(prev) + "-duration", response.data.question.duration)
           return newIndex
         });
 

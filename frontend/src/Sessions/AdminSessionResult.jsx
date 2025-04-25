@@ -49,16 +49,21 @@ const AdminSessionResult = () => {
       for (const index in player.answers) {
         if (player.answers[index].answers.length === 0) continue;
 
+        const questionDuration = questions[index].duration;
+
+        const timeTaken = Math.abs(new Date(player.answers[index].answeredAt) - new Date(player.answers[index].questionStartedAt))/ 1000
+        const points = questions[index].points * ((questionDuration - timeTaken) / questionDuration).toFixed(1);
+
         questionList[index].numAnswers++;
-        questionList[index].totalTimeTaken += Math.abs(new Date(player.answers[index].answeredAt) - new Date(player.answers[index].questionStartedAt))/ 1000;
-        
+        questionList[index].totalTimeTaken += timeTaken;
+
         if (!player.answers[index].correct) continue;
-        totalPoints += questions[index].points;
+        totalPoints += points;
       }
 
       playerList.push({
         name: player.name,
-        points: totalPoints
+        points: totalPoints.toFixed(1)
       })
     }
     
@@ -72,21 +77,22 @@ const AdminSessionResult = () => {
   return(
     <div className="text-center" style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>
       <h1>Results</h1>
-      <h2>{`---------------------------`}</h2>
-      <h2>{`#  | Name        |  Points`}</h2>
-      <h2>{`---------------------------`}</h2>
+      <h5>Points Gained = Points x ((duration - timeTaken) / duration)</h5>
+      <h4>{`---------------------------`}</h4>
+      <h4>{`#  | Name        |  Points`}</h4>
+      <h4>{`---------------------------`}</h4>
       {players?.sort((a, b) => b.points - a.points).slice(0, 5).map((player, index) => {
         const rank = String(index + 1).padEnd(3);
         const name = player.name.padEnd(12);
         const points = String(player.points).padStart(3);
 
         return (
-          <h2 key={index} style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>
+          <h4 key={index} style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>
             {`${rank}| ${name}| ${points} pts`}
-          </h2>
+          </h4>
         );
       })}
-      <h2>{`---------------------------`}</h2>
+      <h4>{`---------------------------`}</h4>
       <BarChart
         xAxis={[{ scaleType: 'band', data: chartData.map(d => d.question), label: 'Question' }]}
         series={[{ data: chartData.map(d => d.avgTime), label: 'Avg Time (s)' }]}

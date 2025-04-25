@@ -69,6 +69,7 @@ const DashboardGame = ({games, setGames, game}) => {
     return totalDuration;
   }
 
+  // Start the game session by mutating it.
   const startGameSession = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -91,6 +92,7 @@ const DashboardGame = ({games, setGames, game}) => {
     }
   }
 
+  // Stop the game session by mutating it.
   const stopGameSession = async () => {
     try {
       const token = localStorage.getItem('token');

@@ -6,9 +6,11 @@ import axios from 'axios';
 import ErrorPopup from '../ErrorPopup';
 
 const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
+  // States to store the game names or game JSON inputs.
   const [newGameName, setNewGameName] = useState(null);
   const [newGameJSON, setNewGameJSON] = useState('');
 
+  // Used for errors
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorPopup, setShowErrorPopup] = useState(false);
 
@@ -25,6 +27,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
     setNewGameJSON('');
   }
 
+  // Save the JSON file to the state if the input changes.
   const handleChangeJSON = async (event) => {
     const file = event.target.files[0];
 
@@ -42,6 +45,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
     }
   }
 
+  // As the user inputs the JSON files without ID, this creates the ID for all of it.
   const addIdsToGame = (game) => {
     return {
       ...game,
@@ -57,6 +61,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
     };
   }
 
+  // Make the new game and store it to the state.
   const createNewGame = async () => {
     if (newGameName === "" && newGameJSON == "") {
       clearFormData();
@@ -72,6 +77,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
       return;
     }
 
+    // If the new game is just title input.
     let newGame;
     if (newGameJSON == "") {
       const email = localStorage.getItem('email')
@@ -105,6 +111,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
         ]
       }
     } else {
+      // If the new game is a JSON file.
       try {
         const jsonData = JSON.parse(newGameJSON);
 
@@ -152,6 +159,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
     return Math.floor((Math.random() * 10000000) + Date.now());
   }
 
+  // Check the JSON file input to make sure it's the correct format.
   const validateJSON = (obj) => {
     const email = localStorage.getItem('email')
     if (

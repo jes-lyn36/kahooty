@@ -64,12 +64,14 @@ const EditGame = () => {
       } catch (err) {
         setErrorMessage(err.response?.data?.error);
         handleShowErrorPopup();
+        return;
       }      
     }
     
     getGames();
   }, []);
 
+  // Segregated functions to save answer, question, and game.
   const saveAnswers = () => {
     let changedQuestion = question;
     changedQuestion.answers = answers;
@@ -97,6 +99,7 @@ const EditGame = () => {
     setAnswers(game.questions[index].answers)
   };
 
+  // Set the question if the input changes.
   const handleQuestionChange = (changedKey, changedValue) => {
     const obj = question;
     const entries = Object.entries(obj).map(([key, value]) => key === changedKey ? [key, changedValue] : [key, value]);
@@ -180,6 +183,7 @@ const EditGame = () => {
     }
   }
 
+  // Adds a new question to the current quiz.
   const addQuestion = async () => {
     const newQuestion = {
       questionId: generateRandomNumber(),
@@ -206,6 +210,7 @@ const EditGame = () => {
     setNumQuestions(numQuestions + 1);
   }
   
+  // Delete a question from the current quiz.
   const deleteQuestion = async (index) => {
     if (numQuestions === 1) {
       setErrorMessage("Cannot delete if there is only one question left.");
@@ -281,12 +286,14 @@ const EditGame = () => {
     setQuestion({...question, answers: answerRemoved});
   }
 
+  // Changes the user's input file to a data format.
   const fileToDataUrl = (file) => {
     const validFileTypes = [ 'image/jpeg', 'image/png', 'image/jpg' ]
     const valid = validFileTypes.find(type => type === file.type);
-    // Bad data, let's walk away.
     if (!valid) {
-      throw Error('provided file is not a png, jpg or jpeg image.');
+      // bad data
+      setErrorMessage("provided file is not a png, jpg or jpeg image.");
+      handleShowErrorPopup();
     }
     
     const reader = new FileReader();

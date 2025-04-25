@@ -11,12 +11,14 @@ const ConfirmDelete = ({
   games, 
   setGames
 }) => {
+  // Used for errors
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorPopup, setShowErrorPopup] = useState(false);
 
   const handleCloseErrorPopup = () => setShowErrorPopup(false);
   const handleShowErrorPopup = () => setShowErrorPopup(true);
 
+  // Delete the game permanently
   const deleteGame = async () => {
     try {
       const newGames = games.filter((g) => g.gameId !== game.gameId);

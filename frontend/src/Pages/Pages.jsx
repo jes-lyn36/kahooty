@@ -39,6 +39,7 @@ const Pages = () => {
     navigate('/dashboard');
   }
 
+  // Logout to the register/login screen.
   const logout = async () => {
     try {
       await axios.post('http://localhost:5005/admin/auth/logout', {}, {

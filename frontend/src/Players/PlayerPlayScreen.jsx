@@ -19,6 +19,7 @@ const PlayerPlayScreen = () => {
   const { playerId } = useParams();
   const [countDown, setCountDown] = useState(1000);
 
+  // Get the current question of the game.
   const getQuestion = async () => {
     try {
       const response = await axios.get(`http://localhost:5005/play/${playerId}/question`);
@@ -53,6 +54,7 @@ const PlayerPlayScreen = () => {
     }
   }
 
+  // Get the answers of the current game.
   const getAnswers = async () => {
     try {
       const response = await axios.get(`http://localhost:5005/play/${playerId}/answer`);
@@ -62,6 +64,7 @@ const PlayerPlayScreen = () => {
     }
   }
 
+  // Get the results of the current game.
   const getResults = async () => {
     try {
       const response = await axios.get(`http://localhost:5005/play/${playerId}/results`);

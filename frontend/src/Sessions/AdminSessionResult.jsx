@@ -4,7 +4,6 @@ import axios from 'axios';
 import { BarChart } from '@mui/x-charts/BarChart';
 
 const AdminSessionResult = () => {
-
   const { sessionId } = useParams();
   let results;
   let sessionStatus;
@@ -16,6 +15,7 @@ const AdminSessionResult = () => {
     getResults();
   }, []);
 
+  // Get the results of the game session.
   const getResults = async () => {
     const token = localStorage.getItem('token');
     let response = await axios.get(`http://localhost:5005/admin/session/${sessionId}/status`, {
@@ -67,6 +67,7 @@ const AdminSessionResult = () => {
       })
     }
     
+    // Input the game session results into the Mui chart.
     setChartData(questionList.map((question, index) => ({
       question: `Question ${index + 1}`,
       avgTime: (question.totalTimeTaken / question.numAnswers).toFixed(2)

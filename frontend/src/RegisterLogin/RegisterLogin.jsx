@@ -16,6 +16,7 @@ const RegisterLogin = ({ successJob, token, name}) => {
   const [userName, setUserName] = useState('');
   const navigate = useNavigate();
 
+  // Used for errors.
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorPopup, setShowErrorPopup] = useState(false);
 
@@ -26,6 +27,7 @@ const RegisterLogin = ({ successJob, token, name}) => {
     navigate('/dashboard');
   }
 
+  // Try to login or register when the user presses submit.
   const tryLoginRegister = async () => {
     if (name === 'register' && password !== confirmPassword) {
       setErrorMessage("Passwords do not match.")

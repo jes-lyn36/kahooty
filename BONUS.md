@@ -54,6 +54,10 @@ Made an error message to the player to inform that they can't join a game when i
 Player will get an error if they input an empty string as their name.
 Player will not be able to edit the sessionId if it's copied from the given link.
 
+Added a timer for each question of the game.
+
+At the end of the timer, the option of the correct answer turns green to indicate that that's the correct answer.
+
 5. Create a new game :
 Added a check to return error message for whether or not the file is a json file when creating a new game.
 Added a chcek to return error message if the JSON file does not comply with the game data.
@@ -69,4 +73,6 @@ For the JSON file, no need to input AnswerIds as the front end generates a new n
 Added a check to make sure that the game has a non-empty title.
 Added a check to make sure that all the game questions has a non-empty title.
 Added a check to make sure that all the answer options of the game is non-empty.
+
+Made a dropdown so the user can only choose to either inlude a youtube link or image.
 

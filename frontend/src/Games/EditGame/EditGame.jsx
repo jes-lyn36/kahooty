@@ -169,6 +169,13 @@ const EditGame = () => {
       return;
     }
 
+    // Make sure the duration and points aren't negative for each question.
+    if (game.questions.some((q) => q.duration <= 0 ||  q.points <= 0)) {
+      setErrorMessage('Points and duration cannot be negative or 0.');
+      handleShowErrorPopup();
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       await axios.put('http://localhost:5005/admin/games', { 

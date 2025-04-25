@@ -60,6 +60,10 @@ const SessionAdvanceResult = () => {
       } else {
         setSessionActive(false);
       }
+
+      if (!response.data.results.active) {
+        navigate(`/session/${sessionId}/result`);
+      }
     } catch (err) {
       setErrorMessage(err.response?.data?.error);
       handleShowErrorPopup();      

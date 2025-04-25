@@ -41,7 +41,7 @@ const ConfirmDelete = ({
 
   return (
     <>
-      <Modal show={showConfirmDelete} onHide={handleCloseConfirmDelete}>
+      <Modal id="confirm-delete-popup" show={showConfirmDelete} onHide={handleCloseConfirmDelete}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Game Delete</Modal.Title>
         </Modal.Header>
@@ -52,7 +52,7 @@ const ConfirmDelete = ({
           <Button variant="secondary" onClick={handleCloseConfirmDelete}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={() => { deleteGame(); handleCloseConfirmDelete(); }}>
+          <Button id="confirm-delete-game" variant="primary" onClick={() => { deleteGame(); handleCloseConfirmDelete(); }}>
             Delete Game
           </Button>
         </Modal.Footer>

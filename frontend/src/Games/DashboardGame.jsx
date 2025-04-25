@@ -162,6 +162,7 @@ const DashboardGame = ({games, setGames, game}) => {
           <div role="group" aria-label={`Actions for game ${game.name}`}>
             <EditIcon 
               role="button" 
+              label={`Edit game ${game.name}`} 
               aria-label={`Edit game ${game.name}`} 
               tabIndex={0} 
               onClick={() => navigate(`/game/${game.gameId}`)} 
@@ -175,6 +176,7 @@ const DashboardGame = ({games, setGames, game}) => {
             />
             <DeleteIcon 
               role="button" 
+              label={`Delete game ${game.name}`}
               aria-label={`Delete game ${game.name}`} 
               tabIndex={0} 
               onClick={handleShowConfirmDelete}

@@ -1,61 +1,99 @@
-// describe and cy are undefined in lint, so i commented it out for now
-/*
 describe('Landing Page, Register, and Login page including errors', () => {
   it('should navigate from the landing to register page.', () => {
-    cy.visit('localhost:3000/');
-    cy.url().should('eq', 'http://localhost:3000/');
+    window.cy.visit('localhost:3000/');
+    window.cy.url().should('eq', 'http://localhost:3000/');
 
-    cy.get('[name="register-nav-link"]').click();
-    cy.url().should('include', '/register');
+    window.cy.get('[name="register-nav-link"]').click();
+    window.cy.url().should('include', '/register');
   })
 
   it('should input different passwords and fail to register.', () => {
-    cy.visit('http://localhost:3000/register');
+    window.cy.visit('http://localhost:3000/register');
 
-    cy.get("#email-input").type("email4");
-    cy.get('#password-input').type("password");
-    cy.get('#username-input').type("username");
-    cy.get('#confirm-password-input').type("password1");
+    window.cy.get("#email-input").type("email4");
+    window.cy.get('#password-input').type("password");
+    window.cy.get('#username-input').type("username");
+    window.cy.get('#confirm-password-input').type("password1");
 
-    cy.get('#submit-login-register-form').click();
-    cy.get("#error-popup").should("be.visible");
+    window.cy.get('#submit-login-register-form').click();
+    window.cy.get("#error-popup").should("be.visible");
   })
 
   it('should register a new user, then logout', () => {
-    cy.visit('http://localhost:3000/register');
+    window.cy.visit('http://localhost:3000/register');
 
     // This email needs to be changed every run of the test.
-    cy.get("#email-input").type("email5");
-    cy.get('#password-input').type("password");
-    cy.get('#username-input').type("username");
-    cy.get('#confirm-password-input').type("password");
+    window.cy.get("#email-input").type("email23");
+    window.cy.get('#password-input').type("password");
+    window.cy.get('#username-input').type("username");
+    window.cy.get('#confirm-password-input').type("password");
 
-    cy.get('#submit-login-register-form').click();
-    cy.url().should('include', '/dashboard');
+    window.cy.get('#submit-login-register-form').click();
+    window.cy.url().should('include', '/dashboard');
 
-    cy.get('#logout-button').click();
-    cy.get('[name="login-nav-link"]').click();
-    cy.url().should('include', '/login');
+    window.cy.get('#logout-button').click();
+    window.cy.get('[name="login-nav-link"]').click();
+    window.cy.url().should('include', '/login');
   })
 
   it('should make an invalid login.', () => {
-    cy.visit('http://localhost:3000/login');
+    window.cy.visit('http://localhost:3000/login');
 
-    cy.get("#email-input").type("najsknfjkasdf");
-    cy.get('#password-input').type("anjaksnjkfa");
+    window.cy.get("#email-input").type("najsknfjkasdf");
+    window.cy.get('#password-input').type("anjaksnjkfa");
 
-    cy.get('#submit-login-register-form').click();
-    cy.get("#error-popup").should("be.visible");
+    window.cy.get('#submit-login-register-form').click();
+    window.cy.get("#error-popup").should("be.visible");
   })
 
-  it('should make a valid login.', () => {
-    cy.visit('http://localhost:3000/login');
+  it('should make a valid login and create->edit->delete a game.', () => {
+    window.cy.visit('http://localhost:3000/login');
 
-    cy.get("#email-input").type("email3");
-    cy.get('#password-input').type("password");
+    window.cy.get("#email-input").type("email23");
+    window.cy.get('#password-input').type("password");
 
-    cy.get('#submit-login-register-form').click();
-    cy.url().should('include', '/dashboard');
+    window.cy.get('#submit-login-register-form').click();
+    window.cy.url().should('include', '/dashboard');
+
+    // Create a new game
+    window.cy.get('#create-game-button').click();
+    window.cy.get('#new-game-name').type("new game 1");
+
+    window.cy.get("#create-new-game-form").should("be.visible");
+
+    window.cy.get('#create-new-game').click();
+
+    cy.get('[aria-label="Edit game new game 1"]').click();
+
+    window.cy.url().should('include', '/question');
+
+    // Edit the game name
+    window.cy.get('#input-new-game-title').type("new game 2");
+
+    // Add new question
+    cy.contains('[role="button"]', 'Add Question').click();
+
+    // Add question title for question 1
+    window.cy.get('#question-title-intput').type("new question 2");
+
+    // Add new answer option
+    cy.contains('[role="button"]', 'Add Answer').click();
+
+    // Change question duration and points
+    window.cy.get('#question-duration').type("10");
+    window.cy.get('#question-points').type("3");
+
+    // Confirm changes
+    cy.contains('[role="button"]', 'Confirm Changes').click();
+  
+    // Delete the new game
+    cy.get('[aria-label="Delete game new game 1new game 2"]').click();
+
+    // Confirm delete the game
+    window.cy.get("#confirm-delete-popup").should("be.visible");
+    window.cy.get('#confirm-delete-game').click();
+
+    // Logout
+    window.cy.get('#logout-button').click();
   })
 })
-*/

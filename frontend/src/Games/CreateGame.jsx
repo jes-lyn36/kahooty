@@ -162,7 +162,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
 
   return (
     <>
-      <Modal show={show} onHide={handleCloseCreateModal}>
+      <Modal id="create-new-game-form" show={show} onHide={handleCloseCreateModal}>
         <Form
           onSubmit={(e) => {
             e.preventDefault();
@@ -175,7 +175,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
           </Modal.Header>
           <Modal.Body>
             <Form.Label>Game Name</Form.Label>
-            <Form.Control type="Name" placeholder="Name of Your Game" value={newGameName} onChange={handleChange}/><br/>
+            <Form.Control id="new-game-name" type="Name" placeholder="Name of Your Game" value={newGameName} onChange={handleChange}/><br/>
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>Upload a JSON file of the game</Form.Label>
               <Form.Control type="file" onChange={handleChangeJSON}/>
@@ -185,7 +185,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
             <Button variant="secondary" onClick={handleCloseCreateModal}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={() => {createNewGame(), handleCloseCreateModal()}}>
+            <Button id="create-new-game" variant="primary" onClick={() => {createNewGame(), handleCloseCreateModal()}}>
               Create Game
             </Button>
           </Modal.Footer>

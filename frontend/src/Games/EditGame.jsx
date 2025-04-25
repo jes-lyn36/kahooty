@@ -254,9 +254,9 @@ const EditGame = () => {
       <h1>Edit Game</h1>
       <Button aria-label="Go back to games" variant="secondary" onClick={() => navigate('/dashboard')}>Back to Games</Button>
       <span>&nbsp;&nbsp;&nbsp;</span>
-      <Button aria-label="Confirm and save changes" variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button><br/>
+      <Button role="button" aria-label="Confirm and save changes" variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button><br/>
       <hr/><br/>
-      <TextField fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
+      <TextField id="input-new-game-title" fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
 
       <Grid container spacing={2} mt={2}>
         <QuestionNav

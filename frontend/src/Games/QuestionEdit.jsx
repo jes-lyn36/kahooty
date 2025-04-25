@@ -20,7 +20,7 @@ const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, ed
   return (
     <>
       <Grid size={6}>
-        <TextField fullWidth label="Question" value={question?.question} onChange={(e) => handleQuestionChange("question", e.target.value)}></TextField>
+        <TextField id="question-title-intput" fullWidth label="Question title" value={question?.question} onChange={(e) => handleQuestionChange("question", e.target.value)}></TextField>
         <List component="nav" aria-label="main mailbox folders" sx={{ width: '100%'}}>
           {
             answers?.map((answer, index) => (
@@ -40,7 +40,7 @@ const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, ed
         </List>
         {
           question?.type !== "judgement" ? 
-            <Button aria-label="Add an answer option" variant="primary" onClick={() => addAnswer()}>Add Answer</Button> : <></>
+            <Button role="button" aria-label="Add an answer option" variant="primary" onClick={() => addAnswer()}>Add Answer</Button> : <></>
         }
       </Grid>
     </>

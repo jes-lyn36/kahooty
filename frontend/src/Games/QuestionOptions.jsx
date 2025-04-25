@@ -27,6 +27,7 @@ const QuestionOptions = ({question, handleQuestionChange}) => {
           </Select>
         </FormControl>
         <TextField
+          id="question-duration"
           label="Duration"
           type="number"
           variant="standard"
@@ -34,6 +35,7 @@ const QuestionOptions = ({question, handleQuestionChange}) => {
           onChange={(e) => handleQuestionChange("duration", parseInt(e.target.value))}
         />
         <TextField
+          id="question-points"
           label="Points"
           type="number"
           variant="standard"

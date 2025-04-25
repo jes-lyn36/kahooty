@@ -19,6 +19,12 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
     setNewGameName(event.target.value);
   }
 
+  const clearFormData = () => {
+    // Reset the values of create game form form is closed.
+    setNewGameName('');
+    setNewGameJSON('');
+  }
+
   const handleChangeJSON = async (event) => {
     const file = event.target.files[0];
 
@@ -29,6 +35,7 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
       setNewGameJSON(text)
 
     } catch {
+      clearFormData();
       setErrorMessage("Failed to read or parse the file.")
       handleShowErrorPopup();
       return;
@@ -37,7 +44,15 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
 
   const createNewGame = async () => {
     if (newGameName === "" && newGameJSON == "") {
-      setErrorMessage("Either one of the fields must be filled.")
+      clearFormData();
+      setErrorMessage("None of the fields are filled. Only one must be filled.")
+      handleShowErrorPopup();
+      return;
+    }
+
+    if (newGameName !== "" && newGameJSON !== "") {
+      clearFormData();
+      setErrorMessage("Both of the fields are filled. Only one must be filled.")
       handleShowErrorPopup();
       return;
     }
@@ -78,12 +93,14 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
         if (validateJSON(jsonData)) {
           newGame = jsonData;
         } else {
+          clearFormData();
           setErrorMessage("The JSON file is not in the correct format for a game.")
           handleShowErrorPopup();
           return;
         }
       } catch {
-        setErrorMessage("The file is a JSON file.")
+        clearFormData();
+        setErrorMessage("The file is not a JSON file.")
         handleShowErrorPopup();
         return;
       }
@@ -103,13 +120,11 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
           }
         }
       );
+      clearFormData();
       setGames(games);
 
-      // Reset the values of create game form after creating a new game.
-      setNewGameName('');
-      setNewGameJSON('');
-
     } catch (err) {
+      clearFormData();
       setErrorMessage(err.response?.data?.error);
       handleShowErrorPopup();
     }
@@ -123,7 +138,6 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
     const email = localStorage.getItem('email')
     if (
       typeof obj !== 'object' ||
-      typeof obj.gameId !== 'number' ||
       typeof obj.name !== 'string' ||
       obj.owner !== email ||
       typeof obj.active !== 'number' ||
@@ -135,7 +149,6 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
   
     for (const question of obj.questions) {
       if (
-        typeof question.questionId !== 'number' ||
         typeof question.question !== 'string' ||
         typeof question.duration !== 'number' ||
         typeof question.type !== 'string' ||
@@ -149,7 +162,6 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
   
       for (const answer of question.answers) {
         if (
-          typeof answer.answerId !== 'number' ||
           typeof answer.answer !== 'string'
         ) {
           return false;
@@ -162,30 +174,31 @@ const CreateGame = ({show, handleCloseCreateModal, games, setGames}) => {
 
   return (
     <>
-      <Modal show={show} onHide={handleCloseCreateModal}>
+      <Modal id="create-new-game-form" show={show} onHide={handleCloseCreateModal}>
         <Form
           onSubmit={(e) => {
             e.preventDefault();
             createNewGame();
+            clearFormData();
             handleCloseCreateModal();
           }}
         >
-          <Modal.Header closeButton>
+          <Modal.Header>
             <Modal.Title>Create A New Game</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form.Label>Game Name</Form.Label>
-            <Form.Control type="Name" placeholder="Name of Your Game" value={newGameName} onChange={handleChange}/><br/>
+            <Form.Control id="new-game-name" type="Name" placeholder="Name of Your Game" value={newGameName} onChange={handleChange}/><br/>
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>Upload a JSON file of the game</Form.Label>
               <Form.Control type="file" onChange={handleChangeJSON}/>
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseCreateModal}>
+            <Button variant="secondary" onClick={() => {handleCloseCreateModal(); clearFormData();}}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={() => {createNewGame(), handleCloseCreateModal()}}>
+            <Button id="create-new-game" variant="primary" onClick={() => {createNewGame(), handleCloseCreateModal()}}>
               Create Game
             </Button>
           </Modal.Footer>

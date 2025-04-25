@@ -33,7 +33,8 @@ const QuestionNav = ({questions, selectedIndex, deleteQuestion, handleListQuesti
             ))
           }
         </List>
-        <Button 
+        <Button
+          role="button" 
           variant="primary" 
           onClick={() => addQuestion()}
           aria-label="Add a new question to the game"

@@ -1,12 +1,10 @@
 {
-  "gameId": 1,
   "name": "My first game",
   "owner": "1",
   "active": 0,
   "thumbnail": "",
   "questions": [
     {
-      "questionId": 100,
       "question": "Question 1?",
       "duration": 10,
       "type": "multiple_choice",
@@ -17,17 +15,14 @@
       ],
       "answers": [
         {
-          "answerId": 200,
           "answer": "Choice 1"
         },
         {
-          "answerId": 201,
           "answer": "Choice 2"
         }
       ]
     },
     {
-      "questionId": 101,
       "question": "Question 2?",
       "duration": 10,
       "type": "single_choice",
@@ -38,11 +33,9 @@
       ],
       "answers": [
         {
-          "answerId": 203,
           "answer": "Choice 3"
         },
         {
-          "answerId": 204,
           "answer": "Choice 4"
         }
       ]

@@ -1,6 +1,8 @@
 # Deployment
 
-[TOC]
+Deployment link : https://bigbrain-deploy-lilac.vercel.app/
+
+[TOC] 
 
 # Note
 

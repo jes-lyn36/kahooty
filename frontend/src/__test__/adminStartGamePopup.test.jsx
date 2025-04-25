@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import AdminStartGamePopup from '../Sessions/AdminStartGamePopup';
+import AdminStartGamePopup from '../Sessions/AdminStartGamePopup/AdminStartGamePopup';
 
 describe('AdminStartGamePopup', () => {
   const sessionId = '123456';

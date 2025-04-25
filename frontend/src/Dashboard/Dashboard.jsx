@@ -1,4 +1,4 @@
-import DashboardGame from "../Games/DashboardGame";
+import DashboardGame from "../Games/DashboardGame/DashboardGame";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 

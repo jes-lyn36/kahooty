@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import capitalize from 'capitalize';
-import ErrorPopup from '../ErrorPopup';
+import ErrorPopup from '../../ErrorPopup';
 import "./RegisterLogin.css";
 
 const RegisterLogin = ({ successJob, token, name}) => {

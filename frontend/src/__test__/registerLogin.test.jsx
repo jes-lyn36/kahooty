@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import RegisterLogin from '../RegisterLogin/RegisterLogin';
+import RegisterLogin from '../RegisterLogin/RegisterLogin/RegisterLogin';
 import { BrowserRouter } from 'react-router-dom';
 
 const navigateMock = vi.fn();

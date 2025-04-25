@@ -2,16 +2,16 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
-import ConfirmDelete from "./ConfirmDelete";
-import AdminStartGamePopup from "../Sessions/AdminStartGamePopup";
+import ConfirmDelete from "../ConfirmDelete";
+import AdminStartGamePopup from "../../Sessions/AdminStartGamePopup/AdminStartGamePopup";
 import axios from 'axios';
-import ErrorPopup from '../ErrorPopup';
-import SessionResultPopup from '../Sessions/SessionResultPopup';
+import ErrorPopup from '../../ErrorPopup';
+import SessionResultPopup from '../../Sessions/SessionResultPopup';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
 import './DashboardGame.css';
-import PastSessionResultPopup from '../Sessions/PastSessionResultPopup';
+import PastSessionResultPopup from '../../Sessions/PastSessionResultPopup';
 
 const DashboardGame = ({games, setGames, game}) => {
   // Used for confirming a game deletion.

@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react";
-import ErrorPopup from '../ErrorPopup';
+import ErrorPopup from '../../ErrorPopup';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./SessionAdvanceResult.css";

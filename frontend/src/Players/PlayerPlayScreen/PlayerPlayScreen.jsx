@@ -1,10 +1,10 @@
-import "../General.css";
+import "../../General.css";
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./PlayerPlayScreen.css";
-import QuestionScreen from "./QuestionScreen";
-import ResultScreen from "./ResultScreen";
+import QuestionScreen from "../QuestionScreen/QuestionScreen";
+import ResultScreen from "../ResultScreen";
 import Spinner from 'react-bootstrap/Spinner';
 
 const PlayerPlayScreen = () => {

@@ -23,7 +23,7 @@ window.describe('Landing Page, Register, and Login page including errors', () =>
     window.cy.visit('http://localhost:3000/register');
 
     // This email needs to be changed every run of the test.
-    window.cy.get("#email-input").type("email23");
+    window.cy.get("#email-input").type("email230");
     window.cy.get('#password-input').type("password");
     window.cy.get('#username-input').type("username");
     window.cy.get('#confirm-password-input').type("password");
@@ -49,7 +49,7 @@ window.describe('Landing Page, Register, and Login page including errors', () =>
   window.it('should make a valid login and create->edit->delete a game.', () => {
     window.cy.visit('http://localhost:3000/login');
 
-    window.cy.get("#email-input").type("email23");
+    window.cy.get("#email-input").type("email230");
     window.cy.get('#password-input').type("password");
 
     window.cy.get('#submit-login-register-form').click();

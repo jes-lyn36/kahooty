@@ -4,11 +4,11 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField';
-import QuestionNav from './QuestionNav';
-import QuestionEdit from './QuestionEdit';
-import QuestionOptions from './QuestionOptions';
+import QuestionNav from '../QuestionNav';
+import QuestionEdit from '../QuestionEdit';
+import QuestionOptions from '../QuestionOptions';
 import './EditGame.css';
-import ErrorPopup from '../ErrorPopup';
+import ErrorPopup from '../../ErrorPopup';
 import Form from 'react-bootstrap/Form';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -193,6 +193,7 @@ const EditGame = () => {
       duration: 1,
       type: "multiple_choice",
       points: 1,
+      attachmentType: "",
       attachment: "",
       correctAnswers: [],
       answers: [

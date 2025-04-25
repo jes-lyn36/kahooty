@@ -1,5 +1,9 @@
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 const ResultScreen = ({results}) => {
   // Calculate the time taken for the user to answer the question.
+  const isMobile = useMediaQuery("(max-width:800px)");
+
   const calculateTimeTaken = (questionStartedAt, answeredAt) => {
     if (!questionStartedAt) {
       return "NA"
@@ -14,14 +18,14 @@ const ResultScreen = ({results}) => {
   let totalPoints = 0;
 
   return(
-    <>
+    <div style={{fontSize: `calc(100vw / ${isMobile ? 28 : 40})`,}}>
       <h1 id="player-wait-text">Results</h1>
-      <h2>Points Gained = Points x ((duration - timeTaken) / duration)</h2>
-      <h2>{`-----------------------------------------------------------`}</h2>
-      <h2 style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>
+      <p>Points Gained = Points x ((duration - timeTaken) / duration)</p>
+      <p>{`---------------------------------------------------------------`}</p>
+      <p style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>
         {`Question ${"#".padEnd(2)} | ${"Time".padEnd(8)} | Status   | ### Points`}
-      </h2>
-      <h2>{`-----------------------------------------------------------`}</h2>
+      </p>
+      <p>{`---------------------------------------------------------------`}</p>
       {results.map((result, index) => {
         const correct = result.correct ? "Correct" : "Wrong";
         const timeTaken = calculateTimeTaken(result.questionStartedAt, result.answeredAt);
@@ -38,13 +42,13 @@ const ResultScreen = ({results}) => {
         const paddedCorrect = correct.padEnd(8);
         const paddedPoints = `${pointsGained} points`
 
-        return (<h2 key={index} style={{fontFamily: 'monospace', whiteSpace: 'pre' }}>Question {paddedIndex} | {paddedTime} | {paddedCorrect} | {paddedPoints}</h2>)
+        return (<p key={index} style={{fontFamily: 'monospace', whiteSpace: 'pre' }}>Question {paddedIndex} | {paddedTime} | {paddedCorrect} | {paddedPoints}</p>)
       })}
-      <h2>{`-----------------------------------------------------------`}</h2>
-      <h2 style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>
+      <p>{`---------------------------------------------------------------`}</p>
+      <p style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>
         {`Total`.padEnd(12) + `|          |          | ${totalPoints.toFixed(1)} points`}
-      </h2>
-    </>
+      </p>
+    </div>
   )
 }
 

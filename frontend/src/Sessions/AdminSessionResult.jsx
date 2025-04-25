@@ -78,7 +78,7 @@ const AdminSessionResult = () => {
   return(
     <div className="text-center" style={{ fontFamily: 'monospace', whiteSpace: 'pre' }}>
       <h1>Results</h1>
-      <h5>Points Gained = Points x ((duration - timeTaken) / duration)</h5>
+      <h5 style={{whiteSpace: "pre-wrap"}}>Points Gained = Points x ((duration - timeTaken) / duration)</h5>
       <h4>{`---------------------------`}</h4>
       <h4>{`#  | Name        |  Points`}</h4>
       <h4>{`---------------------------`}</h4>

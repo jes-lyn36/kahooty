@@ -23,13 +23,7 @@ Happy path #2
 4. Make an invalid login
 5. Made a valid login and go to dashboard
 6. Create a new game
-7. Edit the game name
-8. Add a new question to the game
-9. Add question title
-10. Add answers options inputs
-11. Change question duration
-12. Change question points
-13. Confirm changes
-14. Delete the game
+7. Delete the game
+8. Logout
 
-Justification : We chose this path because a lot of times, users will have some trouble logging/registering in to websites. We wanted to make sure that our application was able to handle incorrect inputs for the login/register submission form. Other than that, We wanted to make sure that users are able to not only create a game, but also edit the game questions, title, answer options, points, and duration of the game. We'll also delete the game after creating it so the user's dashboard doesn't become cluttered overtime.
+Justification : We chose this path because a lot of times, users will have some trouble logging/registering in to websites. We wanted to make sure that our application was able to handle incorrect inputs for the login/register submission form. We'll also create a game then delete the game after creating it so the user's dashboard doesn't become cluttered overtime. Then we logout.

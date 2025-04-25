@@ -1,0 +1,26 @@
+#advance-result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+#advance-result-container h1 {
+  margin-bottom: 1rem;
+}
+
+#advance-result-container hr {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+#button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}

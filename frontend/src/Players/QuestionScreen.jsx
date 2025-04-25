@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
-
+import "./QuestionScreen.css";
 
 const QuestionScreen = ({question, countDown, correctAnswers, curIndex, playerId}) => {
 
@@ -50,15 +50,13 @@ const QuestionScreen = ({question, countDown, correctAnswers, curIndex, playerId
   }
 
   return(
-    <>
+    <div className="question-screen">
       {
         countDown ?? (
           <h2>{countDown}</h2>
         )
       }
       <h2 className="mb-5">{question.question}</h2>
-
-
       
       {question && question.attachmentType === "img" ? (
         <div style={{ width: '100%', aspectRatio: '16 / 9', marginBottom:"10px"}}>
@@ -85,7 +83,7 @@ const QuestionScreen = ({question, countDown, correctAnswers, curIndex, playerId
         </div>
       )}
 
-      <ToggleButtonGroup className="w-100" type="checkbox" vertical value={answers} onChange={handleAnswer}>
+      <ToggleButtonGroup id="answer-button-group" className="w-100" type="checkbox" vertical value={answers} onChange={handleAnswer}>
         {
           question.answers.map((answer, index) => (
             <ToggleButton className="mb-2 rounded-pill" key={index} id={`toggle-${answer.answerId}`} variant={getVariant(answer.answerId)} value={answer.answerId}>
@@ -94,7 +92,7 @@ const QuestionScreen = ({question, countDown, correctAnswers, curIndex, playerId
           ))
         } 
       </ToggleButtonGroup>
-    </>
+    </div>
   )
 }
 

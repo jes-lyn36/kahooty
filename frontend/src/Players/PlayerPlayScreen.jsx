@@ -99,13 +99,15 @@ const PlayerPlayScreen = () => {
           <ResultScreen results={results}/>
         </div>
       ) : answers && question ? (
-        <div className="general-style overlay-content">
-          Answers
+        <div className="general-style gradient-background">
+          <h1>Answers</h1>
+          <hr/>
           <QuestionScreen question={question} correctAnswers={answers} playerId={playerId}/>
         </div>
       ) : question ? (
-        <div className="general-style overlay-content">
+        <div className="general-style gradient-background">
           <h1>Question {index}</h1>
+          <hr/>
           <QuestionScreen question={question} countDown={countDown} curIndex={index} playerId={playerId}/>
         </div>        
       ) : (

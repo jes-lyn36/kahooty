@@ -25,6 +25,16 @@ Made the background for player waiting screen darker so the text would be more r
 
 Made a spinner on the player wait screen before playing a game to indicate the player to wait.
 
+Made the background to be a gradient of blue when the player is playing the game.
+Made the Question/Answer title to be on the top right of the screen.
+Made a line to separate the title and content.
+
+Made a timer to count down above the question text when the player is answering the question.
+Made the question text in the middle of the screen.
+Made the answers centred in the middle of the screen.
+
+When the timer has run out, the correct answer will be shown in green in the answers page.
+
 4. Dashboard :
 Made the game cards fill the screen as a grid so the user would be able to see more cards more efficiently.
 
@@ -37,3 +47,22 @@ Made the background a gradient of blue.
 Made the login link in the top of the login/register and landing page centred for better style.
 Made the register link in the top of the login/register and landing page centred for better style.
 Made the top navigation links blue and underlined on hover for better user experience.
+
+Made sure all the game thumbnails are equal in size to make the dashboard grid look neater.
+
+6. Results screen for players and admin
+
+For admin :
+Final result screen needs to display a bar chart, so we used Barchart from Mui to display the results.
+Points formula is shown before the table.
+Used table to display the rank of the player, name, and points to one decimal place for neatness.
+
+Made the SessionAdvanceResult screen title centred.
+Made the SessionAdvanceResult screen button centred.
+
+For players :
+A table is used to display the data including question number, time taken to answer, question status, points per question, and total.
+Data is separated by consistently distanced table bars for neatness and readability.
+
+The constrast of colours are also similar to the player waiting page.
+We also used the grass background for this result page.

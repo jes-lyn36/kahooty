@@ -36,3 +36,7 @@
   width: 100px;;
   height: 100px;;
 }
+
+.gradient-background {
+  background: linear-gradient(to top, #ffffff, #e3f2fd);
+}

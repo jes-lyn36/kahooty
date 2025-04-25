@@ -18,6 +18,7 @@ import SessionAdvanceResult from '../Sessions/SessionAdvanceResult';
 import PlayerPlayScreen from '../Players/PlayerPlayScreen';
 import Button from 'react-bootstrap/Button';
 import './Pages.css'; 
+import AdminSessionResult from '../Sessions/AdminSessionResult';
 
 const Pages = () => {
   const [token, setToken] = useState(null);
@@ -68,6 +69,14 @@ const Pages = () => {
               >
                 Logout
               </Button>
+              <Button
+                id="dashboard-button"
+                variant="outline-primary" 
+                onClick={() => navigate("/dashboard")}
+                aria-label="Go back to dashboard"
+              >
+                Dashboard
+              </Button>
             </>
           ) : (
             <nav aria-label="User authentication" id="auth-nav">
@@ -90,6 +99,7 @@ const Pages = () => {
         <Route path="/play/join" element={<SessionStart />} />
         <Route path="/play/:playerId" element={<PlayerPlayScreen />} />
         <Route path="/session/:sessionId" element={<SessionAdvanceResult />} />
+        <Route path="/session/:sessionId/result" element={<AdminSessionResult />} />
       </Routes>
     </>
   );

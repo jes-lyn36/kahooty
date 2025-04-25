@@ -3,6 +3,11 @@
   margin-left: 10px;
 }
 
+#dashboard-button {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
 #auth-nav {
   display: flex;
   justify-content: center;

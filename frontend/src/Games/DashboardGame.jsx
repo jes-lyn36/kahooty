@@ -11,6 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
 import './DashboardGame.css';
+import PastSessionResultPopup from '../Sessions/PastSessionResultPopup';
 
 const DashboardGame = ({games, setGames, game}) => {
   // Used for confirming a game deletion.
@@ -24,6 +25,12 @@ const DashboardGame = ({games, setGames, game}) => {
 
   const handleCloseStartGameSession = () => setShowStartGameSession(false);
   const handleShowStartGameSession = () => setShowStartGameSession(true);
+
+  // Used to see Previous session results
+  const [showPastSessionResults, setShowPastSessionResults] = useState(false);
+
+  const handleClosePastSessionResults = () => setShowPastSessionResults(false);
+  const handleShowPastSessionResults = () => setShowPastSessionResults(true);
 
   // Error popups
   const [errorMessage, setErrorMessage] = useState("");
@@ -156,6 +163,10 @@ const DashboardGame = ({games, setGames, game}) => {
             onClick={stopGameSession} 
             disabled={!sessionActive}
           > Stop Game Session </Button>
+          <Button 
+            variant="outline-secondary"
+            onClick={handleShowPastSessionResults}
+          > Show Past Session Results</Button>
         </ListGroup>
 
         <Card.Body id="edit-delete-game">
@@ -209,6 +220,12 @@ const DashboardGame = ({games, setGames, game}) => {
         showResultPopup={showResultPopup}
         handleCloseResultPopup={handleCloseResultPopup}
         game={game}
+      />
+
+      <PastSessionResultPopup
+        game={game}
+        showPopup={showPastSessionResults}
+        handleClosePopup={handleClosePastSessionResults}
       />
 
       <ConfirmDelete

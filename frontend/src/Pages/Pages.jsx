@@ -65,6 +65,7 @@ const Pages = () => {
                 variant="outline-primary" 
                 onClick={logout} 
                 aria-label="Log out of your account"
+                name="logout-nav-link"
               >
                 Logout
               </Button>
@@ -79,9 +80,9 @@ const Pages = () => {
             </>
           ) : (
             <nav aria-label="User authentication" id="auth-nav">
-              <Link to="/register" className="auth-link">Register</Link>
+              <Link name="register-nav-link" to="/register" className="auth-link">Register</Link>
               <span id="auth-separator">|</span>
-              <Link to="/login" className="auth-link">Login</Link>
+              <Link name="login-nav-link" to="/login" className="auth-link">Login</Link>
             </nav>
           )}
           <hr />

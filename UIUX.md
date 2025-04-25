@@ -33,3 +33,4 @@ Made a landing page before the register or login page for better user experience
 
 Made the login link in the top of the login/register and landing page centred for better style.
 Made the register link in the top of the login/register and landing page centred for better style.
+Made the top navigation links blue and underlined on hover for better user experience.

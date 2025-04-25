@@ -140,19 +140,35 @@ const DashboardGame = ({games, setGames, game}) => {
     <>
       <Card id="dashboard-game-card" style={{ width: '18rem' }}>
         <Card.Img variant="top" src={game.thumbnail ? game.thumbnail : './src/assets/no_image.png'} alt={game.thumbnail ? `${game.name} thumbnail` : 'No game image available'}/>
+        
         <Card.Body>
           <Card.Title>{game.name}</Card.Title>
         </Card.Body>
+
         <ListGroup className="list-group-flush">
           <ListGroup.Item>Number of questions: {totalQuestion()}</ListGroup.Item>
           <ListGroup.Item>Total duration: {totalDuration()}</ListGroup.Item>
-          <Button variant="outline-secondary" onClick={startGameSession} disabled={sessionActive}>
+          <Button name="Start Game Session" variant="outline-secondary" onClick={startGameSession} disabled={sessionActive}>
             {!sessionActive ? <>Start Game Session</> : <>Session Started</>}
           </Button>
-          <Button variant="outline-secondary" onClick={() => {navigate(`/session/${sessionId}`, { state: { game } }); console.log(game)}} disabled={!sessionActive}> Modify Game Session </Button>
-          <Button variant="outline-secondary" onClick={stopGameSession} disabled={!sessionActive}> Stop Game Session </Button>
-          <Button variant="outline-secondary" onClick={handleShowPastSessionResults}> Show Past Session Results</Button>
+          <Button 
+            name="Modify Game Session" 
+            variant="outline-secondary" 
+            onClick={() => {navigate(`/session/${sessionId}`, { state: { game } }); console.log(game)}} 
+            disabled={!sessionActive}
+          > Modify Game Session </Button>
+          <Button 
+            name="Stop Game Session" 
+            variant="outline-secondary" 
+            onClick={stopGameSession} 
+            disabled={!sessionActive}
+          > Stop Game Session </Button>
+          <Button 
+            variant="outline-secondary"
+            onClick={handleShowPastSessionResults}
+          > Show Past Session Results</Button>
         </ListGroup>
+
         <Card.Body id="edit-delete-game">
           <div role="group" aria-label={`Actions for game ${game.name}`}>
             <EditIcon 

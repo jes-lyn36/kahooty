@@ -22,7 +22,7 @@ const AdminStartGamePopup = ({sessionId, showStartGameSession, handleCloseStartG
           </CopyToClipboard>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseStartGameSession}>
+          <Button data-testid="close-start-game-popup" variant="secondary" onClick={handleCloseStartGameSession}>
             Close
           </Button>
         </Modal.Footer>

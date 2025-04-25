@@ -10,7 +10,7 @@ const SessionResultPopup = ({sessionId, showResultPopup, handleCloseResultPopup,
   }
   
   return (
-    <Modal show={showResultPopup} onHide={handleCloseResultPopup}>
+    <Modal id="admin-game-ended-popup" show={showResultPopup} onHide={handleCloseResultPopup}>
       <Modal.Header closeButton>
         <Modal.Title>Game Session Results</Modal.Title>
       </Modal.Header>
@@ -24,6 +24,7 @@ const SessionResultPopup = ({sessionId, showResultPopup, handleCloseResultPopup,
           Close
         </Button>
         <Button 
+          role='button'
           variant="secondary" 
           onClick={resultScreen} 
           aria-label="Navigate to session results screen"

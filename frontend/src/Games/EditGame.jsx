@@ -10,10 +10,12 @@ import QuestionOptions from './QuestionOptions';
 import './EditGame.css';
 import ErrorPopup from '../ErrorPopup';
 import Form from 'react-bootstrap/Form';
-
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const EditGame = () => {
   // Used to show error popup messages.
+  const isMobile = useMediaQuery("(max-width:800px)");
+
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorPopup, setShowErrorPopup] = useState(false);
 
@@ -316,35 +318,52 @@ const EditGame = () => {
       <span>&nbsp;&nbsp;&nbsp;</span>
       <Button role="button" aria-label="Confirm and save changes" variant="secondary" onClick={() => saveChange()}>Confirm Changes</Button><br/>
       <hr/><br/>
-      <TextField id="input-new-game-title" fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
+      <TextField slotProps={{ inputLabel: { shrink: true } }} id="input-new-game-title" fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
       <Form.Group controlId="formFile">
         <Form.Label>Change Thumbnail</Form.Label>
         <Form.Control type="file" accept="image/png, image/jpeg, image/png" onChange={(e) => handleFileChange(e)}/>
       </Form.Group>
 
-      <Grid id="edit-sections" container spacing={2} mt={2}>
-        <QuestionNav
-          questions={game.questions}
-          selectedIndex={selectedIndex}
-          deleteQuestion={deleteQuestion}
-          handleListQuestionClick={handleListQuestionClick} 
-          addQuestion={addQuestion}
-        />
-        
-        <QuestionEdit 
-          question={question} 
-          answers={answers}
-          handleQuestionChange={handleQuestionChange}
-          deleteAnswer={deleteAnswer}
-          editAnswer={editAnswer}
-          addCorrectAnswer={addCorrectAnswer}
-          addAnswer={addAnswer}
-        />
+      <Grid 
+        direction={isMobile ? "column" : "row"} 
+        container 
+        spacing={2}
+        my={3}
+        id="edit-sections"
+        alignItems="stretch"
+      >
+        <Grid display="flex" flexDirection="column" alignItems="center" size={isMobile ? 12 : 3}>
+          <QuestionNav
+            questions={game.questions}
+            selectedIndex={selectedIndex}
+            deleteQuestion={deleteQuestion}
+            handleListQuestionClick={handleListQuestionClick} 
+            addQuestion={addQuestion}
+          />
+        </Grid>
 
-        <QuestionOptions
-          question={question}
-          handleQuestionChange={handleQuestionChange}
-        />
+        {isMobile && <hr />}
+        
+        <Grid item size={isMobile ? 12 : 6}>
+          <QuestionEdit 
+            question={question} 
+            answers={answers}
+            handleQuestionChange={handleQuestionChange}
+            deleteAnswer={deleteAnswer}
+            editAnswer={editAnswer}
+            addCorrectAnswer={addCorrectAnswer}
+            addAnswer={addAnswer}
+          />
+        </Grid>
+
+        {isMobile && <hr />}
+
+        <Grid item size={isMobile ? 12 : 3}>
+          <QuestionOptions
+            question={question}
+            handleQuestionChange={handleQuestionChange}
+          />
+        </Grid>
       </Grid>
 
       <ErrorPopup

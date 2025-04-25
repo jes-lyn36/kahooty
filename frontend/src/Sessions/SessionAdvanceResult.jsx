@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ErrorPopup from '../ErrorPopup';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
+import "./SessionAdvanceResult.css";
 
 const SessionAdvanceResult = () => {
   const location = useLocation();
@@ -17,6 +18,7 @@ const SessionAdvanceResult = () => {
 
   const navigate = useNavigate();
 
+  // Advances game session to the next question/to end.
   const advanceGameSession = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -46,6 +48,7 @@ const SessionAdvanceResult = () => {
     getGameStatus();
   }, [sessionActive]);
 
+  // Get the status to check if game is active or not.
   const getGameStatus = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -70,6 +73,7 @@ const SessionAdvanceResult = () => {
     }
   }
 
+  // Skip all next questions and immediately end session.
   const stopGameSession = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -92,20 +96,23 @@ const SessionAdvanceResult = () => {
   }
 
   return (
-    <main>
+    <main id="advance-result-container">
       <h1>Advance Result screen</h1>
-      <hr/>
-      <Button aria-label="Go back to dashboard" onClick={() => navigate('/Dashboard')}>Back to Dashboard</Button>
-      <Button aria-label="Advance to the next stage of the game" onClick={advanceGameSession} disabled={!sessionActive}>Advance</Button>
-      <Button 
-        aria-label={sessionActive ? "Stop the game session" : "Session has already ended"}
-        aria-live="polite" 
-        variant="outline-secondary" 
-        onClick={stopGameSession} 
-        disabled={!sessionActive}
-      >
-        {sessionActive ? <>Stop Game Session</> : <>Session Ended</>}
-      </Button>
+      <hr/> 
+      <div id="button-group">
+        <Button aria-label="Go back to dashboard" onClick={() => navigate('/Dashboard')}>Back to Dashboard</Button>
+        <Button aria-label="Advance to the next stage of the game" onClick={advanceGameSession} disabled={!sessionActive}>Advance</Button>
+        <Button 
+          aria-label={sessionActive ? "Stop the game session" : "Session has already ended"}
+          aria-live="polite" 
+          variant="outline-secondary" 
+          onClick={stopGameSession} 
+          disabled={!sessionActive}
+        >
+          {sessionActive ? <>Stop Game Session</> : <>Session Ended</>}
+        </Button>
+      </div>
+
 
       <ErrorPopup
         errorMessage={errorMessage}

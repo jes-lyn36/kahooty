@@ -329,6 +329,7 @@ const EditGame = () => {
         container 
         spacing={2}
         my={3}
+        id="edit-sections"
         alignItems="stretch"
       >
         <Grid display="flex" flexDirection="column" alignItems="center" size={isMobile ? 12 : 3}>

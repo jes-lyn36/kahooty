@@ -66,7 +66,7 @@ const RegisterLogin = ({ successJob, token, name}) => {
             <InputGroup.Text id="password-input-title">Password </InputGroup.Text>
             <Form.Control value={password} onChange={e => setPassword(e.target.value)}
               placeholder="Password123"
-              aria-label="Password"
+              aria-label="input password"
               aria-describedby="password-input-title"
               type="password"
               id="password-input"

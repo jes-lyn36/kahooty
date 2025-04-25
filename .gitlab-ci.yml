@@ -12,3 +12,10 @@ lint:
     - cd frontend
     - npm install
     - npm run lint
+
+tests:
+  stage: checks
+  script:
+    - cd frontend
+    - npm install
+    - npm run test

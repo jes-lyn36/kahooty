@@ -17,7 +17,7 @@ const PastSessionResultPopup = ({game, showPopup, handleClosePopup}) => {
           <Modal.Title id="past-session-title">Past Sessions</Modal.Title>
         </Modal.Header>
         <Modal.Body id="past-session-list">
-          {game.oldSessions.map((sessionId) => {
+          {game.oldSessions?.map((sessionId) => {
             return(<h5 key={sessionId} style={{cursor: "pointer"}} onClick={() => navigate(`/session/${sessionId}/result`)}>{sessionId}</h5>)
           })}
         </Modal.Body>

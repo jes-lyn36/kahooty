@@ -45,8 +45,8 @@ const QuestionScreen = ({question, countDown, correctAnswers, curIndex, playerId
     const match = url.match(regExp);
 
     return (match && match[2].length === 11)
-        ? match[2]
-        : null;
+      ? match[2]
+      : null;
   }
 
   return(
@@ -60,31 +60,30 @@ const QuestionScreen = ({question, countDown, correctAnswers, curIndex, playerId
 
 
       
-        {question && question.attachmentType === "img" ? (
-          <div style={{ width: '100%', aspectRatio: '16 / 9', marginBottom:"10px"}}>
-            <img 
+      {question && question.attachmentType === "img" ? (
+        <div style={{ width: '100%', aspectRatio: '16 / 9', marginBottom:"10px"}}>
+          <img 
             style={{
               width: '100%',
               height: '100%',
               objectFit: 'cover',
               objectPosition: 'center'
             }}
-
             src={question.attachment} 
-            />
-          </div>
-        ) : question && question.attachmentType === "youtube" && (
-          <div style={{ width: '100%', aspectRatio: '16 / 9', marginBottom:"10px"}}>
-            <iframe 
-                src={`https://www.youtube.com/embed/${covertToEmbeddedUrl(question.attachment)}`}
-                title="YouTube video preview"
-                frameBorder="0"   
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen
-                style={{width: "100%", height: "100%"}}
-            />
-          </div>
-        )}
+          />
+        </div>
+      ) : question && question.attachmentType === "youtube" && (
+        <div style={{ width: '100%', aspectRatio: '16 / 9', marginBottom:"10px"}}>
+          <iframe 
+            src={`https://www.youtube.com/embed/${covertToEmbeddedUrl(question.attachment)}`}
+            title="YouTube video preview"
+            frameBorder="0"   
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+            style={{width: "100%", height: "100%"}}
+          />
+        </div>
+      )}
 
       <ToggleButtonGroup className="w-100" type="checkbox" vertical value={answers} onChange={handleAnswer}>
         {

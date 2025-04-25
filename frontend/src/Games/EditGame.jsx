@@ -281,33 +281,33 @@ const EditGame = () => {
     setQuestion({...question, answers: answerRemoved});
   }
 
-    const fileToDataUrl = (file) => {
-      const validFileTypes = [ 'image/jpeg', 'image/png', 'image/jpg' ]
-      const valid = validFileTypes.find(type => type === file.type);
-      // Bad data, let's walk away.
-      if (!valid) {
-          throw Error('provided file is not a png, jpg or jpeg image.');
-      }
-      
-      const reader = new FileReader();
-      const dataUrlPromise = new Promise((resolve,reject) => {
-          reader.onerror = reject;
-          reader.onload = () => resolve(reader.result);
-      });
-      reader.readAsDataURL(file);
-      return dataUrlPromise;
+  const fileToDataUrl = (file) => {
+    const validFileTypes = [ 'image/jpeg', 'image/png', 'image/jpg' ]
+    const valid = validFileTypes.find(type => type === file.type);
+    // Bad data, let's walk away.
+    if (!valid) {
+      throw Error('provided file is not a png, jpg or jpeg image.');
     }
+    
+    const reader = new FileReader();
+    const dataUrlPromise = new Promise((resolve,reject) => {
+      reader.onerror = reject;
+      reader.onload = () => resolve(reader.result);
+    });
+    reader.readAsDataURL(file);
+    return dataUrlPromise;
+  }
   
-    const handleFileChange = async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-    
-      const extension = file.type.split('/')[1]; // e.g., 'jpg' or 'png'
-      const renamedFile = new File([file], `image.${extension}`, { type: file.type });
-    
-      const dataUrl = await fileToDataUrl(renamedFile);
-      handleGameChange("thumbnail", dataUrl);
-    };
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+  
+    const extension = file.type.split('/')[1]; // e.g., 'jpg' or 'png'
+    const renamedFile = new File([file], `image.${extension}`, { type: file.type });
+  
+    const dataUrl = await fileToDataUrl(renamedFile);
+    handleGameChange("thumbnail", dataUrl);
+  };
   
   return (
     <div className="side-spacing">

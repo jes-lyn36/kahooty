@@ -11,7 +11,7 @@ const QuestionOptions = ({question, handleQuestionChange}) => {
   return (
     <>
       <Grid size={3}>
-      <FormControl fullWidth>
+        <FormControl fullWidth>
           <InputLabel id="question-type-label">Type</InputLabel>
           <Select
             labelId="question-type-label

@@ -13,6 +13,7 @@ const SessionStart = () => {
   const [inputSessionId, setInputSessionId] = useState(null);
   const { sessionId } = useParams();
 
+  // Used for errors.
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorPopup, setShowErrorPopup] = useState(false);
 
@@ -27,6 +28,7 @@ const SessionStart = () => {
     }
   }, [sessionId]);
 
+  // player tries to join the game session when they press submit.
   const joinGame = async () => {
     if (!name) {
       setErrorMessage("Name must be a valid, non-empty string.");

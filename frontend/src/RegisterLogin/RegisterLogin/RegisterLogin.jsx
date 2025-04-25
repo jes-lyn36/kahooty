@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import capitalize from 'capitalize';
-import ErrorPopup from '../ErrorPopup';
+import ErrorPopup from '../../ErrorPopup';
 import "./RegisterLogin.css";
 
 const RegisterLogin = ({ successJob, token, name}) => {
@@ -16,6 +16,7 @@ const RegisterLogin = ({ successJob, token, name}) => {
   const [userName, setUserName] = useState('');
   const navigate = useNavigate();
 
+  // Used for errors.
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorPopup, setShowErrorPopup] = useState(false);
 
@@ -26,6 +27,7 @@ const RegisterLogin = ({ successJob, token, name}) => {
     navigate('/dashboard');
   }
 
+  // Try to login or register when the user presses submit.
   const tryLoginRegister = async () => {
     if (name === 'register' && password !== confirmPassword) {
       setErrorMessage("Passwords do not match.")

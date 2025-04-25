@@ -1,13 +1,21 @@
 import Button from 'react-bootstrap/Button';
 import List from '@mui/material/List';
+import { useState } from "react";
 import TextField from '@mui/material/TextField';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import Form from 'react-bootstrap/Form';
+import ErrorPopup from '../ErrorPopup';
 
 const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, editAnswer, addCorrectAnswer, addAnswer}) => {
+  // Used to show error popup messages.
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+
+  const handleCloseErrorPopup = () => setShowErrorPopup(false);
+  const handleShowErrorPopup = () => setShowErrorPopup(true);
 
   const disableAnswers = (answerId) => {
     if (!answerId) return true;
@@ -17,12 +25,15 @@ const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, ed
     return false;
   }
 
-  const fileToDataUrl = (file) => {
+  // Changes the input file to a saveable data format.
+  const fileToDataUrl = (file) => {  
     const validFileTypes = [ 'image/jpeg', 'image/png', 'image/jpg' ]
     const valid = validFileTypes.find(type => type === file.type);
-    // Bad data, let's walk away.
+    // Bad data
     if (!valid) {
-      throw Error('provided file is not a png, jpg or jpeg image.');
+      setErrorMessage("provided file is not a png, jpg or jpeg image.");
+      handleShowErrorPopup();
+      return;
     }
     
     const reader = new FileReader();
@@ -34,6 +45,7 @@ const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, ed
     return dataUrlPromise;
   }
 
+  // Save the file everytime it changes.
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -76,10 +88,17 @@ const QuestionEdit = ({question, answers, handleQuestionChange, deleteAnswer, ed
           ))
         }
       </List>
+
       {
         question?.type !== "judgement" ? 
           <Button role="button" aria-label="Add an answer option" variant="primary" onClick={() => addAnswer()}>Add Answer</Button> : <></>
       }
+      
+      <ErrorPopup
+        errorMessage={errorMessage}
+        showErrorPopup={showErrorPopup}
+        handleCloseErrorPopup={handleCloseErrorPopup}
+      />
     </>
   )
 

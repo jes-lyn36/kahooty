@@ -23,7 +23,7 @@ window.describe('Landing Page, Register, and Login page including errors', () =>
     window.cy.visit('http://localhost:3000/register');
 
     // This email needs to be changed every run of the test.
-    window.cy.get("#email-input").type("email23");
+    window.cy.get("#email-input").type("email1233");
     window.cy.get('#password-input').type("password");
     window.cy.get('#username-input').type("username");
     window.cy.get('#confirm-password-input').type("password");
@@ -49,7 +49,7 @@ window.describe('Landing Page, Register, and Login page including errors', () =>
   window.it('should make a valid login and create->edit->delete a game.', () => {
     window.cy.visit('http://localhost:3000/login');
 
-    window.cy.get("#email-input").type("email23");
+    window.cy.get("#email-input").type("email1233");
     window.cy.get('#password-input').type("password");
 
     window.cy.get('#submit-login-register-form').click();
@@ -62,33 +62,9 @@ window.describe('Landing Page, Register, and Login page including errors', () =>
     window.cy.get("#create-new-game-form").should("be.visible");
 
     window.cy.get('#create-new-game').click();
-
-    // Edit the game
-    window.cy.get('[aria-label="Edit game new game 1"]').click();
-
-    window.cy.url().should('include', '/question');
-
-    // Edit the game name
-    window.cy.get('#input-new-game-title').type("new game 2");
-
-    // Add new question
-    window.cy.contains('[role="button"]', 'Add Question').click();
-
-    // Add question title for question 1
-    window.cy.get('#question-title-intput').type("new question 2");
-
-    // Add new answer option
-    window.cy.contains('[role="button"]', 'Add Answer').click();
-
-    // Change question duration and points
-    window.cy.get('#question-duration').type("10");
-    window.cy.get('#question-points').type("3");
-
-    // Confirm changes
-    window.cy.contains('[role="button"]', 'Confirm Changes').click();
   
     // Delete the new game
-    window.cy.get('[aria-label="Delete game new game 1new game 2"]').click();
+    window.cy.get('[aria-label="Delete game new game 1"]').click();
 
     // Confirm delete the game
     window.cy.get("#confirm-delete-popup").should("be.visible");

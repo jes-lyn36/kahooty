@@ -4,11 +4,11 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField';
-import QuestionNav from './QuestionNav';
-import QuestionEdit from './QuestionEdit';
-import QuestionOptions from './QuestionOptions';
+import QuestionNav from '../QuestionNav';
+import QuestionEdit from '../QuestionEdit';
+import QuestionOptions from '../QuestionOptions';
 import './EditGame.css';
-import ErrorPopup from '../ErrorPopup';
+import ErrorPopup from '../../ErrorPopup';
 import Form from 'react-bootstrap/Form';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -66,12 +66,14 @@ const EditGame = () => {
       } catch (err) {
         setErrorMessage(err.response?.data?.error);
         handleShowErrorPopup();
+        return;
       }      
     }
     
     getGames();
   }, []);
 
+  // Segregated functions to save answer, question, and game.
   const saveAnswers = () => {
     let changedQuestion = question;
     changedQuestion.answers = answers;
@@ -99,6 +101,7 @@ const EditGame = () => {
     setAnswers(game.questions[index].answers)
   };
 
+  // Set the question if the input changes.
   const handleQuestionChange = (changedKey, changedValue) => {
     const obj = question;
     const entries = Object.entries(obj).map(([key, value]) => key === changedKey ? [key, changedValue] : [key, value]);
@@ -166,6 +169,13 @@ const EditGame = () => {
       return;
     }
 
+    // Make sure the duration and points aren't negative for each question.
+    if (game.questions.some((q) => q.duration <= 0 ||  q.points <= 0)) {
+      setErrorMessage('Points and duration cannot be negative or 0.');
+      handleShowErrorPopup();
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       await axios.put('http://localhost:5005/admin/games', { 
@@ -182,6 +192,7 @@ const EditGame = () => {
     }
   }
 
+  // Adds a new question to the current quiz.
   const addQuestion = async () => {
     const newQuestion = {
       questionId: generateRandomNumber(),
@@ -189,6 +200,7 @@ const EditGame = () => {
       duration: 1,
       type: "multiple_choice",
       points: 1,
+      attachmentType: "",
       attachment: "",
       correctAnswers: [],
       answers: [
@@ -208,6 +220,7 @@ const EditGame = () => {
     setNumQuestions(numQuestions + 1);
   }
   
+  // Delete a question from the current quiz.
   const deleteQuestion = async (index) => {
     if (numQuestions === 1) {
       setErrorMessage("Cannot delete if there is only one question left.");
@@ -283,12 +296,14 @@ const EditGame = () => {
     setQuestion({...question, answers: answerRemoved});
   }
 
+  // Changes the user's input file to a data format.
   const fileToDataUrl = (file) => {
     const validFileTypes = [ 'image/jpeg', 'image/png', 'image/jpg' ]
     const valid = validFileTypes.find(type => type === file.type);
-    // Bad data, let's walk away.
     if (!valid) {
-      throw Error('provided file is not a png, jpg or jpeg image.');
+      // bad data
+      setErrorMessage("provided file is not a png, jpg or jpeg image.");
+      handleShowErrorPopup();
     }
     
     const reader = new FileReader();

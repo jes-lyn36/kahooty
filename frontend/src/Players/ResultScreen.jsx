@@ -1,5 +1,5 @@
 const ResultScreen = ({results}) => {
-
+  // Calculate the time taken for the user to answer the question.
   const calculateTimeTaken = (questionStartedAt, answeredAt) => {
     if (!questionStartedAt) {
       return "NA"

@@ -5,7 +5,7 @@ window.describe('Admin start and end game succesfully', () => {
     window.cy.visit('http://localhost:3000/register');
 
     // This email needs to be changed every run of the test.
-    window.cy.get("#email-input").type("email1202");
+    window.cy.get("#email-input").type("email1203");
     window.cy.get('#password-input').type("password");
     window.cy.get('#username-input').type("username");
     window.cy.get('#confirm-password-input').type("password");
@@ -54,7 +54,7 @@ window.describe('Admin start and end game succesfully', () => {
     // Log back in
     window.cy.visit('http://localhost:3000/login');
 
-    window.cy.get("#email-input").type("email1202");
+    window.cy.get("#email-input").type("email1203");
     window.cy.get('#password-input').type("password");
 
     window.cy.get('#submit-login-register-form').click();

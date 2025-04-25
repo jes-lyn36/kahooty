@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import DashboardGame from '../Games/DashboardGame';
+import DashboardGame from '../Games/DashboardGame/DashboardGame';
 import { BrowserRouter } from 'react-router-dom';
 
 const navigateMock = vi.fn();

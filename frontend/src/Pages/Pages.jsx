@@ -11,11 +11,11 @@ import {
 import Register from '../RegisterLogin/Register';
 import Login from '../RegisterLogin/Login';
 import Dashboard from '../Dashboard/Dashboard';
-import EditGame from '../Games/EditGame';
+import EditGame from '../Games/EditGame/EditGame';
 import LandingPage from '../LandingPage/LandingPage';
 import SessionStart from '../Sessions/SessionStart';
-import SessionAdvanceResult from '../Sessions/SessionAdvanceResult';
-import PlayerPlayScreen from '../Players/PlayerPlayScreen';
+import SessionAdvanceResult from '../Sessions/SessionAdvanceResult/SessionAdvanceResult';
+import PlayerPlayScreen from '../Players/PlayerPlayScreen/PlayerPlayScreen';
 import Button from 'react-bootstrap/Button';
 import './Pages.css'; 
 import AdminSessionResult from '../Sessions/AdminSessionResult';
@@ -39,6 +39,7 @@ const Pages = () => {
     navigate('/dashboard');
   }
 
+  // Logout to the register/login screen.
   const logout = async () => {
     try {
       await axios.post('http://localhost:5005/admin/auth/logout', {}, {

@@ -1,10 +1,11 @@
 Components to test
-1. ErrorPopup.jsx (Jesslyn)
-2. AdminStartGamePopup.jsx (Jesslyn)
-3. DashboardGame.jsx (Zovin)
-4. AdminSessionResult.jsx
-5. RegisterLogin.jsx (Zovin)
-6. LandingPage.jsx (Jesslyn)
+1. ErrorPopup.jsx
+2. AdminStartGamePopup.jsx
+3. DashboardGame.jsx
+4. ResultScreen.jsx
+5. RegisterLogin.jsx
+6. LandingPage.jsx
+7. pastSessionResuls.jsx (extra)
 
 Happy path #1
 1. Register succesfully

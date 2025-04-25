@@ -322,7 +322,7 @@ const EditGame = () => {
         <Form.Control type="file" accept="image/png, image/jpeg, image/png" onChange={(e) => handleFileChange(e)}/>
       </Form.Group>
 
-      <Grid container spacing={2} mt={2}>
+      <Grid id="edit-sections" container spacing={2} mt={2}>
         <QuestionNav
           questions={game.questions}
           selectedIndex={selectedIndex}

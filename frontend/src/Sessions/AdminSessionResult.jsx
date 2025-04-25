@@ -36,12 +36,12 @@ const AdminSessionResult = () => {
     const playerList = [];
     const questionList = [];
 
-    for (const question of questions) {
+    questions.forEach(_ => {
       questionList.push({
         numAnswers: 0,
         totalTimeTaken: 0
       });
-    }
+    });
     
     for (const player of results) {
       if (players.some((p) => p.name === player.name)) continue;

@@ -284,7 +284,7 @@ const EditGame = () => {
       <hr/><br/>
       <TextField id="input-new-game-title" fullWidth label="Title" value={game?.name} onChange={(e) => handleGameChange("name", e.target.value)}></TextField>
 
-      <Grid container spacing={2} mt={2}>
+      <Grid id="edit-sections" container spacing={2} mt={2}>
         <QuestionNav
           questions={game.questions}
           selectedIndex={selectedIndex}

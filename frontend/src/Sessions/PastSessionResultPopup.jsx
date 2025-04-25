@@ -8,6 +8,7 @@ const PastSessionResultPopup = ({game, showPopup, handleClosePopup}) => {
   return (
     <>
       <Modal 
+        id="past-session-results-popup"
         show={showPopup} 
         onHide={handleClosePopup}
         aria-labelledby="past-session-results-modal"
@@ -22,7 +23,7 @@ const PastSessionResultPopup = ({game, showPopup, handleClosePopup}) => {
           })}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClosePopup}>
+          <Button role="button" variant="secondary" onClick={handleClosePopup}>
             Close
           </Button>
         </Modal.Footer>

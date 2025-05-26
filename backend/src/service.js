@@ -526,3 +526,4 @@ export const getResults = (playerId) =>
       resolve(session.players[playerId].answers);
     }
   });
+  
